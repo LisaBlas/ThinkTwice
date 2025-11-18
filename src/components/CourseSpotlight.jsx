@@ -1,15 +1,27 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const CourseSpotlight = () => {
+  const navigate = useNavigate();
   const modules = [
-    { title: 'Introduction to Core Concepts - Fallacies and Biases', description: 'Understand the basics and why they matter. Learn about the behaviour and habits of your brain that influence how you process information. Preview this module.', comingSoon: false },
-    { title: 'Spotlight on mainstream News and Reporting', description: 'See how events become headlines and learn to read between the lines. Sharpen your eye for bias, logical flaws and manipulation techniques. Try our first interactive tool.', comingSoon: true },
-    { title: 'Spotlight on Social Media and AI', description: 'Dive into how short-form formats, algorithms and AI infuence our perception of truth. Gain confidence to spot fake and misinformed content.', comingSoon: true },
-    { title: 'Your daily Cognitive Biases', description: 'Explore the blind spots in your own mind that change how you see the world. Learn how to spot and counteract biases that may cloud your judgement and decisions.', comingSoon: true },
-    { title: 'Heated Argument or constructive Debate?', description: 'Discover tweaks that can shift and improve conversations with friends and family. Respond to faulty arguments and errors in reasoning with confidence and poise.', comingSoon: true },
+    { title: 'Introduction to Core Concepts - Fallacies and Biases', description: 'Understand the basics and why they matter. Learn about the behaviour and habits of your brain that influence how you process information. Preview this module.', comingSoon: false, link: '/module/1' },
+    { title: 'Spotlight on mainstream News and Reporting', description: 'See how events become headlines and learn to read between the lines. Sharpen your eye for bias, logical flaws and manipulation techniques. Try our first interactive tool.', comingSoon: true, link: null },
+    { title: 'Spotlight on Social Media and AI', description: 'Dive into how short-form formats, algorithms and AI infuence our perception of truth. Gain confidence to spot fake and misinformed content.', comingSoon: true, link: null },
+    { title: 'Your daily Cognitive Biases', description: 'Explore the blind spots in your own mind that change how you see the world. Learn how to spot and counteract biases that may cloud your judgement and decisions.', comingSoon: true, link: null },
+    { title: 'Heated Argument or constructive Debate?', description: 'Discover tweaks that can shift and improve conversations with friends and family. Respond to faulty arguments and errors in reasoning with confidence and poise.', comingSoon: true, link: null },
   ];
   const [active, setActive] = useState(0);
+
+  const handleModuleClick = (idx, module) => {
+    setActive(idx);
+    if (module.link) {
+      // Small delay to show the selection before navigating
+      setTimeout(() => {
+        navigate(module.link);
+      }, 300);
+    }
+  };
 
   return (
     <section id="course" className="min-h-screen flex items-center bg-editorial-orange overflow-hidden py-24 md:py-32 lg:py-52">
@@ -48,12 +60,12 @@ const CourseSpotlight = () => {
               {modules.map((module, idx) => (
                 <motion.button
                   key={idx}
-                  onClick={() => setActive(idx)}
+                  onClick={() => handleModuleClick(idx, module)}
                   className={`w-full relative flex flex-col text-left pl-6 pr-4 py-4 overflow-hidden transition-all duration-300 ${
                     active === idx
                       ? 'text-editorial-charcoal'
                       : 'text-editorial-cream hover:opacity-80'
-                  }`}
+                  } ${module.link ? 'cursor-pointer' : 'cursor-default'}`}
                   initial={false}
                   whileHover={{ scale: active === idx ? 1 : 1.02 }}
                   whileTap={{ scale: 0.98 }}
