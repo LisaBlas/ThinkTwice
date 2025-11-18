@@ -37,9 +37,9 @@ const FallacyDetector = () => {
   };
 
   const benefits = [
-    "Understand the different types of fallacies through simple, clear language",
-    "Learn to spot common fallacies by seeing how they are used in the news",
-    "Sharpen your eye to identify patterns of media manipulation",
+    "Learn to spot common fallacies and biases with real life examples",
+    "Sharpen your senses for manipulation and influencing techniques",
+    "Practice having more rational and constructive conversations",
     ,
   ];
 
@@ -50,7 +50,7 @@ const FallacyDetector = () => {
         {/* Top Section: Title and Description */}
         <div className="mx-auto text-center max-w-8xl mb-8">
           <h1 className="font-playfair font-bold text-8xl md:text-8xl sm:text-4xl text-editorial-charcoal mb-6">
-            Fact or fallacy? <span className="font-normal text-editorial-charcoal opacity-80"></span>
+            Practice makes perfect.<span className="font-normal text-editorial-charcoal opacity-80"></span>
           </h1>
         </div>
 
@@ -59,7 +59,7 @@ const FallacyDetector = () => {
           {/* Headline Instruction spanning both columns */}
           <div className="lg:col-span-2">
             <h1 className="font-light text-md md:text-xl lg:text-2xl text-editorial-charcoal mb-6 text-center">
-              Discover fallacies used in recent news headlines and compare them by news outlet or topic.
+              Discover our interactive tools to train your critical eye and rational brain.
             </h1>
           </div>
           
@@ -85,11 +85,11 @@ const FallacyDetector = () => {
 
             {/* Fallacy Tool Button */}
             <div>
-              <button 
-                onClick={() => navigate('/articles')}
+              <button
+                onClick={() => navigate('/tools')}
                 className="w-36 text-center text-editorial-orange border-editorial-orange border-2 font-mono hover:bg-editorial-orange hover:text-editorial-cream font-mono text-xs sm:text-sm py-3 px-6 transition-colors duration-100 transform hover:scale-105"
               >
-                Try it now
+                All Tools
               </button>
             </div>
 

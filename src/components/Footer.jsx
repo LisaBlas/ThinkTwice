@@ -18,7 +18,7 @@ const Footer = () => {
             <h4 className="font-playfair font-semibold tracking-wider text-editorial-cream mb-4 text-xl">Navigate</h4>
             <ul className="space-y-1">
               <li><Link to="/" className="font-mono text-editorial-cream hover:font-bold">Home</Link></li>
-              <li><Link to="/articles" className="font-mono text-editorial-cream hover:font-bold">Tools</Link></li>
+              <li><Link to="/tools" className="font-mono text-editorial-cream hover:font-bold">Tools</Link></li>
               <li><Link to="/#about" className="font-mono text-editorial-cream hover:font-bold">About</Link></li>
               <li><Link to="/#course" className="font-mono text-editorial-cream hover:font-bold">Learn</Link></li>
             </ul>

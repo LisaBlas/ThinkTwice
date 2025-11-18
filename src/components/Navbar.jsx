@@ -77,7 +77,7 @@ const Navbar = () => {
       {/* Desktop Menu */}
       <div className="hidden md:flex items-center space-x-6 font-mono text-editorial-charcoal">
         <button onClick={handleHomeClick} className="hover:text-editorial-orange transition-all font-normal hover:font-bold">Home</button>
-        <Link to="/articles" className="hover:text-editorial-orange transition-all font-normal hover:font-bold">Tools</Link>
+        <Link to="/tools" className="hover:text-editorial-orange transition-all font-normal hover:font-bold">Tools</Link>
         <Link to="/#about" onClick={() => setIsOpen(false)} className="hover:text-editorial-orange transition-all font-normal hover:font-bold">About</Link>
         <Link to="/#course" className="bg-editorial-orange hover:opacity-90 text-white py-2 px-4 transition-all font-normal hover:font-bold">
           Learn
@@ -95,7 +95,7 @@ const Navbar = () => {
       {isOpen && (
         <div className="md:hidden absolute top-full left-0 w-full border-t-2 border-editorial-orange bg-editorial-cream flex flex-col items-center space-y-4 py-4 shadow-md">
           <button onClick={handleHomeClick} className="hover:text-editorial-orange transition-all font-normal hover:font-bold">Home</button>
-          <Link to="/articles" onClick={() => setIsOpen(false)} className="hover:text-editorial-orange transition-all font-normal hover:font-bold">Tools</Link>
+          <Link to="/tools" onClick={() => setIsOpen(false)} className="hover:text-editorial-orange transition-all font-normal hover:font-bold">Tools</Link>
           <Link to="/#about" onClick={() => setIsOpen(false)} className="hover:text-editorial-orange transition-all font-normal hover:font-bold">About</Link>
           <Link to="/#course" onClick={() => setIsOpen(false)} className="bg-editorial-orange hover:opacity-90 text-white py-2 px-4 transition-all font-normal">
             Learn

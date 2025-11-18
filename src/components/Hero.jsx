@@ -58,7 +58,7 @@ const Hero = () => {
             to="/#tool"
             className="w-80 text-center text-editorial-orange border-editorial-orange border-2 font-mono hover:bg-editorial-orange hover:text-editorial-cream font-mono text-xs sm:text-sm py-3 px-6 transition-colors duration-100 transform hover:scale-105"
           >
-            Explore our first Tool
+            Explore our Tools
           </Link>
           <Link 
             to="/#course"
