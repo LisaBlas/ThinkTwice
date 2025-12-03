@@ -17,6 +17,11 @@ const ArticlesPage = () => {
     topic: null,
   });
 
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   useEffect(() => {
     const fetchArticles = async () => {
       try {

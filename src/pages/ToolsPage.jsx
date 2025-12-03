@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { XMarkIcon, MagnifyingGlassIcon, ExclamationTriangleIcon, LightBulbIcon, NewspaperIcon, AcademicCapIcon, ChartBarIcon } from '@heroicons/react/24/solid';
 import Footer from '../components/Footer';
 
 const ToolsPage = () => {
   const [selectedTool, setSelectedTool] = useState(null);
+
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const tools = [
     {

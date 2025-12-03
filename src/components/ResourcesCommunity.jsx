@@ -34,7 +34,7 @@ const pillars = [
 
 const ResourcesCommunity = () => {
   return (
-    <section id="about" className="min-h-screen flex items-center bg-editorial-cream py-12">
+    <section id="about" className="flex items-center bg-editorial-cream py-24 md:py-32 lg:py-52">
       <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 max-w-6xl">
         {/* Left Column */}
         <div>

@@ -1,4 +1,31 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+/* Cardiff Font Faces */
+@font-face {
+  font-family: 'Cardiff';
+  src: url('/fonts/Cardiff-5a2v.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Cardiff';
+  src: url('/fonts/CardiffItalic-yjAV.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Cardiff';
+  src: url('/fonts/CardiffBold-6av1.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Cardiff';
+  src: url('/fonts/CardiffBoldItalic-9op2.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}
 
 @tailwind base;
 
@@ -43,18 +70,22 @@ background-image: url("data:image/svg+xml,%3Csvg width='12' height='16' viewBox=
     transform: rotateY(180deg);
   }
 
+  .font-cardiff {
+    font-family: 'Cardiff', serif;
+  }
+
   .font-playfair {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cardiff', serif;
   }
 
   .font-bitter {
-    font-family: 'Bitter', serif;
+    font-family: 'Cardiff', serif;
   }
   .font-work-sans {
-    font-family: 'Work Sans', serif;
+    font-family: 'Cardiff', serif;
   }
   .font-numito {
-    font-family: 'Numito', serif;
+    font-family: 'Cardiff', serif;
   }
   /* Additional custom styles */
 

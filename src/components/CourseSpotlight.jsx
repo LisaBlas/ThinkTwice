@@ -8,7 +8,8 @@ const CourseSpotlight = () => {
     { title: 'Introduction to Core Concepts - Fallacies and Biases', description: 'Understand the basics and why they matter. Learn about the behaviour and habits of your brain that influence how you process information. Preview this module.', comingSoon: false, link: '/module/1' },
     { title: 'Spotlight on mainstream News and Reporting', description: 'See how events become headlines and learn to read between the lines. Sharpen your eye for bias, logical flaws and manipulation techniques. Try our first interactive tool.', comingSoon: true, link: null },
     { title: 'Spotlight on Social Media and AI', description: 'Dive into how short-form formats, algorithms and AI infuence our perception of truth. Gain confidence to spot fake and misinformed content.', comingSoon: true, link: null },
-    { title: 'Your daily Cognitive Biases', description: 'Explore the blind spots in your own mind that change how you see the world. Learn how to spot and counteract biases that may cloud your judgement and decisions.', comingSoon: true, link: null },
+    { title: 'Spotlight on Science and Academia', description: 'Navigate scientific studies, research papers and academic discourse with confidence. Learn to evaluate methodology, understand statistical claims and distinguish credible research from pseudoscience.', comingSoon: true, link: null },
+    { title: 'Spotlight on Consumption - your daily Biases', description: 'Explore the blind spots in your own mind that change how you see the world. Learn how to spot and counteract biases that may cloud your judgement and decisions.', comingSoon: true, link: null },
     { title: 'Heated Argument or constructive Debate?', description: 'Discover tweaks that can shift and improve conversations with friends and family. Respond to faulty arguments and errors in reasoning with confidence and poise.', comingSoon: true, link: null },
   ];
   const [active, setActive] = useState(0);
@@ -24,7 +25,7 @@ const CourseSpotlight = () => {
   };
 
   return (
-    <section id="course" className="min-h-screen flex items-center bg-editorial-orange overflow-hidden py-24 md:py-32 lg:py-52">
+    <section id="course" className="flex items-center bg-editorial-orange overflow-hidden py-24 md:py-32 lg:py-52">
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row items-center justify-between gap-16">
 

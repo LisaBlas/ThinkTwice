@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { PlayCircleIcon, MusicalNoteIcon, BookOpenIcon, WrenchScrewdriverIcon, CheckCircleIcon, ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/solid';
+import { BookOpenIcon, WrenchScrewdriverIcon, CheckCircleIcon, ChevronDownIcon, ChevronUpIcon, EyeIcon, SpeakerWaveIcon, ChatBubbleLeftIcon, CogIcon } from '@heroicons/react/24/solid';
 import Footer from '../components/Footer';
 
 const Module1Page = () => {
@@ -9,12 +9,18 @@ const Module1Page = () => {
   const [modulesExpanded, setModulesExpanded] = useState(false);
   const [quickNavExpanded, setQuickNavExpanded] = useState(true);
 
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const modules = [
-    { id: 1, title: 'Introduction to Core Concepts', available: true, current: true },
+    { id: 1, title: 'Understand Core Concepts', available: true, current: true },
     { id: 2, title: 'Spotlight on News and Reporting', available: false },
     { id: 3, title: 'Spotlight on Social Media and AI', available: false },
-    { id: 4, title: 'Your daily Cognitive Biases', available: false },
-    { id: 5, title: 'Heated Argument or constructive Debate?', available: false },
+    { id: 4, title: 'Spotlight on Science and Academia', available: false },
+    { id: 5, title: 'Spotlight on Consumption: Your daily Cognitive Biases', available: false },
+    { id: 6, title: 'Spotlight on Interactions: Heated Argument or constructive Debate?', available: false },
   ];
 
   const resources = [
@@ -185,7 +191,15 @@ const Module1Page = () => {
                           activeSection === 'video' ? 'text-editorial-orange font-bold' : 'text-editorial-charcoal'
                         }`}
                       >
-                        Video Lesson
+                        Watch
+                      </button>
+                      <button
+                        onClick={() => scrollToSection('keyterms')}
+                        className={`block w-full text-left text-sm font-mono hover:text-editorial-orange transition-colors ${
+                          activeSection === 'keyterms' ? 'text-editorial-orange font-bold' : 'text-editorial-charcoal'
+                        }`}
+                      >
+                        Key Terms
                       </button>
                       <button
                         onClick={() => scrollToSection('podcast')}
@@ -193,7 +207,7 @@ const Module1Page = () => {
                           activeSection === 'podcast' ? 'text-editorial-orange font-bold' : 'text-editorial-charcoal'
                         }`}
                       >
-                        Podcast
+                        Listen
                       </button>
                       <button
                         onClick={() => scrollToSection('resources')}
@@ -201,7 +215,7 @@ const Module1Page = () => {
                           activeSection === 'resources' ? 'text-editorial-orange font-bold' : 'text-editorial-charcoal'
                         }`}
                       >
-                        Resources
+                        Explore
                       </button>
                       <button
                         onClick={() => scrollToSection('practice')}
@@ -209,7 +223,7 @@ const Module1Page = () => {
                           activeSection === 'practice' ? 'text-editorial-orange font-bold' : 'text-editorial-charcoal'
                         }`}
                       >
-                        Practice Tool
+                        Practice
                       </button>
                     </motion.nav>
                   ) : (
@@ -247,25 +261,25 @@ const Module1Page = () => {
                 <span className="h-px flex-1 bg-editorial-charcoal/20"></span>
               </div>
               <h1 className="font-playfair font-bold text-4xl md:text-6xl text-editorial-charcoal mb-6">
-                Introduction to Core Concepts
+                Understand Core Concepts
               </h1>
             </div>
 
             {/* Introduction Section */}
-            <section id="intro" className="mb-16 scroll-mt-24">
-              <div className="bg-editorial-cream shadow-lg p-8">
-                <h2 className="font-playfair font-bold text-2xl md:text-3xl text-editorial-charcoal mb-6">
-                  Welcome to Module 1
+            <section id="intro" className="mb-24 scroll-mt-24">
+              <div className="bg-editorial-orange shadow-lg p-8">
+                <h2 className="font-playfair font-bold text-2xl md:text-3xl text-editorial-cream mb-6">
+                  Why am I here?
                 </h2>
-                <div className="space-y-4 text-editorial-charcoal font-light leading-relaxed">
+                <div className="space-y-4 text-editorial-cream font-light leading-relaxed text-lg">
                   <p>
-                    Understanding logical fallacies and cognitive biases is the foundation of critical thinking. 
-                    In this module, you'll learn to recognize the most common errors in reasoning and the mental 
+                    Understanding logical fallacies and cognitive biases is the foundation of critical thinking.
+                    In this module, you'll learn to recognize the most common errors in reasoning and the mental
                     shortcuts that can lead us astray.
                   </p>
-                  <div className="bg-editorial-orange/10 border-l-4 border-editorial-orange p-4 mt-6">
-                    <p className="font-mono text-sm">
-                      <strong>Learning Objectives:</strong> Identify common logical fallacies • Understand cognitive biases 
+                  <div className="bg-editorial-cream/20 border-l-4 border-editorial-cream p-4 mt-6">
+                    <p className="font-normal text-sm text-editorial-cream">
+                      <strong>Learning Objectives:</strong> Identify common logical fallacies • Understand cognitive biases
                       • Apply critical thinking to real-world examples • Practice with interactive tools
                     </p>
                   </div>
@@ -274,68 +288,148 @@ const Module1Page = () => {
             </section>
 
             {/* Video Section */}
-            <section id="video" className="mb-16 scroll-mt-24">
+            <section id="video" className="mb-24 scroll-mt-24">
               <div className="flex items-center gap-3 mb-6">
+                <EyeIcon className="h-6 w-6 text-editorial-charcoal flex-shrink-0" />
                 <h2 className="font-playfair font-bold text-2xl md:text-3xl text-editorial-charcoal">
                   Watch: Introduction to Logical Fallacies
                 </h2>
               </div>
-              <div className="bg-editorial-cream shadow-lg overflow-hidden">
-                <div className="aspect-video bg-editorial-charcoal flex items-center justify-center">
-                  {/* Placeholder for video - replace with actual embed */}
-                  <div className="text-center text-editorial-cream p-8">
-                    <PlayCircleIcon className="h-20 w-20 mx-auto mb-4 opacity-50" />
-                    <p className="font-mono text-sm">Video: Introduction to Logical Fallacies</p>
-                    <p className="font-light text-xs mt-2 opacity-75">Duration: 15 minutes</p>
-                  </div>
+              <div className="shadow-lg overflow-hidden">
+                <div className="aspect-video">
+                  <iframe
+                    width="100%"
+                    height="100%"
+                    src="https://www.youtube.com/embed/nYYkRaU0xh8"
+                    title="YouTube video player"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                    className="w-full h-full"
+                  ></iframe>
                 </div>
-                <div className="p-6">
-                  <h3 className="font-playfair font-bold text-xl text-editorial-charcoal mb-3">
+                <div className="p-6 bg-editorial-charcoal">
+                  <h3 className="font-playfair font-bold text-xl text-editorial-cream mb-3">
                     Understanding Logical Fallacies
                   </h3>
-                  <p className="text-editorial-charcoal font-light leading-relaxed">
-                    This video introduces the most common logical fallacies you'll encounter in everyday media. 
-                    Learn to spot ad hominem attacks, straw man arguments, false dichotomies, and more through 
+                  <p className="text-editorial-cream/60 font-light leading-relaxed">
+                    This video introduces the most common logical fallacies you'll encounter in everyday media.
+                    Learn to spot ad hominem attacks, straw man arguments, false dichotomies, and more through
                     real-world examples.
                   </p>
                 </div>
               </div>
             </section>
 
-            {/* Podcast Section */}
-            <section id="podcast" className="mb-16 scroll-mt-24">
+            {/* Key Terms Section */}
+            <section id="keyterms" className="mb-24 scroll-mt-24">
               <div className="flex items-center gap-3 mb-6">
+                <ChatBubbleLeftIcon className="h-5 w-5 text-editorial-charcoal flex-shrink-0" />
+                <h2 className="font-playfair font-bold text-2xl md:text-3xl text-editorial-charcoal">
+                  Key Terms to Know
+                </h2>
+              </div>
+              <p className="text-editorial-charcoal font-light leading-relaxed mb-8">
+                Click each card to reveal the definition of important concepts in critical thinking.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <DefinitionCard
+                  term="Logic"
+                  definition="The systematic study of valid reasoning and inference. Logic helps us distinguish between sound arguments and flawed ones by examining the structure and relationships between premises and conclusions."
+                  color="#6F1D1B"
+                />
+                <DefinitionCard
+                  term="Rational"
+                  definition="Based on reason, facts, and logical thinking rather than emotions or opinions. A rational approach involves evaluating evidence objectively and drawing conclusions that follow logically from available information."
+                  color="#2e5266"
+                />
+                <DefinitionCard
+                  term="Critical Thinking"
+                  definition="The disciplined process of actively analyzing, synthesizing, and evaluating information to reach well-reasoned conclusions. It involves questioning assumptions, identifying biases, and considering alternative perspectives."
+                  color="#d4a574"
+                />
+                <DefinitionCard
+                  term="Cognitive Bias"
+                  definition="Systematic patterns of deviation from rational judgment that occur due to the way our brains process information. These mental shortcuts can lead to errors in thinking, perception, and decision-making."
+                  color="#8b4513"
+                />
+                <DefinitionCard
+                  term="Fallacy"
+                  definition="An error in reasoning that undermines the logic of an argument. Fallacies can be intentional (used to manipulate) or unintentional, and recognizing them is essential for critical analysis of claims and arguments."
+                  color="#c44536"
+                />
+                <DefinitionCard
+                  term="Systems 1 and 2 Thinking"
+                  definition="Two modes of thought identified by Daniel Kahneman: System 1 is fast, automatic, and intuitive; System 2 is slow, deliberate, and analytical. Understanding both helps us recognize when we need to engage deeper critical thinking."
+                  color="#4a5859"
+                />
+              </div>
+            </section>
+
+            {/* Podcast Section */}
+            <section id="podcast" className="mb-24 scroll-mt-24">
+              <div className="flex items-center gap-3 mb-6">
+                <SpeakerWaveIcon className="h-6 w-6 text-editorial-charcoal flex-shrink-0" />
                 <h2 className="font-playfair font-bold text-2xl md:text-3xl text-editorial-charcoal">
                   Listen: dgergerqg
                 </h2>
               </div>
-              <div className="bg-editorial-cream shadow-lg p-8">
-                <div className="flex items-start gap-6">
-                  <div className="hidden md:block w-32 h-32 bg-editorial-orange flex-shrink-0 flex items-center justify-center">
-                    <MusicalNoteIcon className="h-16 w-16 text-editorial-cream" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-playfair font-bold text-xl text-editorial-charcoal mb-2">
-                      Cognitive Biases in Everyday Life
-                    </h3>
-                    <p className="text-sm font-mono text-editorial-charcoal/60 mb-4">
-                      Episode 1 • 28 minutes
-                    </p>
-                    <p className="text-editorial-charcoal font-light leading-relaxed mb-6">
-                      Join us as we explore how cognitive biases affect our daily decisions, from what we buy 
-                      to what we believe. Featuring expert insights and practical examples you can apply immediately.
-                    </p>
-                    <div className="bg-editorial-charcoal h-12 flex items-center justify-center">
-                      <p className="text-editorial-cream font-mono text-sm">Audio Player Placeholder</p>
-                    </div>
+              <div className="shadow-lg overflow-hidden">
+                <iframe
+                  src="https://open.spotify.com/embed/episode/08M6pzHcv8mH5eZcQLBkIT?utm_source=generator"
+                  width="100%"
+                  height="352"
+                  frameBorder="0"
+                  allowFullScreen=""
+                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                  loading="lazy"
+                ></iframe>
+                <div className="bg-editorial-cream p-6">
+                  <p className="text-editorial-charcoal/60 font-light text-sm mb-4">
+                    Listen on other platforms:
+                  </p>
+                  <div className="flex flex-wrap gap-3">
+                    <a
+                      href="https://podcasts.apple.com/podcast/id1234567890"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block bg-editorial-charcoal text-editorial-cream font-mono text-xs py-2 px-4 hover:bg-editorial-orange transition-colors"
+                    >
+                      Apple Podcasts
+                    </a>
+                    <a
+                      href="https://podcasts.google.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block bg-editorial-charcoal text-editorial-cream font-mono text-xs py-2 px-4 hover:bg-editorial-orange transition-colors"
+                    >
+                      Google Podcasts
+                    </a>
+                    <a
+                      href="https://www.youtube.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block bg-editorial-charcoal text-editorial-cream font-mono text-xs py-2 px-4 hover:bg-editorial-orange transition-colors"
+                    >
+                      YouTube
+                    </a>
+                    <a
+                      href="https://overcast.fm/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block bg-editorial-charcoal text-editorial-cream font-mono text-xs py-2 px-4 hover:bg-editorial-orange transition-colors"
+                    >
+                      Overcast
+                    </a>
                   </div>
                 </div>
               </div>
             </section>
 
             {/* Resources Section */}
-            <section id="resources" className="mb-16 scroll-mt-24">
+            <section id="resources" className="mb-24 scroll-mt-24">
               <div className="flex items-center gap-3 mb-6">
+                <BookOpenIcon className="h-6 w-6 text-editorial-charcoal flex-shrink-0" />
                 <h2 className="font-playfair font-bold text-2xl md:text-3xl text-editorial-charcoal">
                   Want more?
                 </h2>
@@ -372,16 +466,14 @@ const Module1Page = () => {
             </section>
 
             {/* Practice Tool Section */}
-            <section id="practice" className="mb-16 scroll-mt-24">
-              <div className="flex items-center gap-3 mb-6">
-                <h2 className="font-playfair font-bold text-2xl md:text-3xl text-editorial-charcoal">
-                  Time to practice!
-                </h2>
-              </div>
+            <section id="practice" className="mb-24 scroll-mt-24">
               <div className="bg-editorial-orange shadow-lg p-8">
-                <h3 className="font-playfair font-bold text-2xl text-editorial-cream mb-4">
-                  Fallacy Detector Tool
-                </h3>
+                <div className="flex items-center gap-2 mb-4">
+                  <CogIcon className="h-8 w-8 text-editorial-cream flex-shrink-0" />
+                  <h2 className="font-playfair font-bold text-2xl md:text-3xl text-editorial-cream">
+                    Time to practice!
+                  </h2>
+                </div>
                 <p className="text-editorial-cream font-light leading-relaxed mb-6">
                   Put your knowledge into practice! Use our Fallacy Detector to analyze real news headlines 
                   and identify logical fallacies. This interactive tool provides instant feedback and detailed 
@@ -414,6 +506,107 @@ const Module1Page = () => {
 
       <Footer />
     </div>
+  );
+};
+
+// Definition Card Component
+const DefinitionCard = ({ term, definition, color }) => {
+  const [isFlipped, setIsFlipped] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleFlip = () => {
+    setIsFlipped(!isFlipped);
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      setIsFlipped(!isFlipped);
+    }
+  };
+
+  return (
+    <motion.div
+      className="relative h-64 overflow-hidden shadow-lg"
+      style={{ borderColor: color }}
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
+      whileHover={!isFlipped ? { scale: 1.02 } : {}}
+      transition={{ duration: 0.4, ease: 'easeInOut' }}
+    >
+      {/* Front of card - Term */}
+      <div
+        className="w-full h-full card-background-pattern bg-editorial-cream p-4 flex flex-col justify-between cursor-pointer"
+        onClick={handleFlip}
+        onKeyDown={handleKeyDown}
+        tabIndex={0}
+        role="button"
+        aria-label={`${term} definition card. Click to reveal definition.`}
+      >
+        <div className="flex-1 flex items-center justify-center">
+          <h3
+            className="font-playfair font-bold text-3xl text-center text-editorial-charcoal"
+          >
+            {term}
+          </h3>
+        </div>
+
+        <div className="flex items-center self-end opacity-80">
+          <p
+            className="text-xs font-mono mr-2 leading-tight"
+            style={{ color: color }}
+          >
+            Click to reveal
+          </p>
+          <motion.div
+            animate={{ rotate: isHovered ? 360 : 0 }}
+            transition={{ duration: 0.4 }}
+          >
+            <EyeIcon
+              className="w-5 h-5"
+              style={{ color: color }}
+            />
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Back of card - Definition (Revealed overlay) */}
+      <AnimatePresence>
+        {isFlipped && (
+          <motion.div
+            onClick={handleFlip}
+            className="absolute inset-0 cursor-pointer bg-editorial-cream p-4 flex flex-col z-10 overflow-y-auto custom-scrollbar"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+          >
+            <div className="flex flex-col h-full">
+              {/* Top Section: Term Pill */}
+              <div className="flex flex-col gap-4 mb-4">
+                <div className="flex-shrink-0">
+                  <span
+                    className="inline-flex items-center px-4 py-1 font-semibold text-sm tracking-wider text-editorial-cream opacity-80"
+                    style={{ backgroundColor: color, height: '1.5rem' }}
+                  >
+                    {term.toUpperCase()}
+                  </span>
+                </div>
+              </div>
+
+              {/* Content Wrapper */}
+              <div className="flex-grow space-y-4 text-md">
+                <div className="relative">
+                  <p className="leading-relaxed text-editorial-charcoal font-light">
+                    {definition}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
   );
 };
 
