@@ -19,7 +19,7 @@ const CourseSpotlight = () => {
     if (module.link) {
       // Small delay to show the selection before navigating
       setTimeout(() => {
-        navigate(module.link);
+        navigate(module.link, { state: { fromHome: true } });
       }, 300);
     }
   };

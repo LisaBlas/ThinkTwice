@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ModuleLayout from '../components/ModuleLayout';
+import ComingSoonModal from '../components/ComingSoonModal';
 import { EyeIcon, SpeakerWaveIcon, ChatBubbleLeftIcon, BookOpenIcon, CogIcon } from '@heroicons/react/24/solid';
 import { Link } from 'react-router-dom';
 
 const Module2Page = () => {
+  const [showModal, setShowModal] = useState(true);
+
   return (
-    <ModuleLayout moduleId={2} moduleTitle="Spotlight on News and Reporting">
+    <>
+      <ComingSoonModal isOpen={showModal} onClose={() => {}} />
+
+      <div className="blur-sm pointer-events-none">
+        <ModuleLayout moduleId={2} moduleTitle="Spotlight on News and Reporting">
       {/* Introduction Section */}
       <section id="intro" className="mb-24 scroll-mt-24">
         <div className="bg-editorial-orange shadow-lg p-8">
@@ -49,21 +56,6 @@ const Module2Page = () => {
         </div>
       </section>
 
-      {/* Key Terms Section */}
-      <section id="keyterms" className="mb-24 scroll-mt-24">
-        <div className="flex items-center gap-3 mb-6">
-          <ChatBubbleLeftIcon className="h-5 w-5 text-editorial-charcoal flex-shrink-0" />
-          <h2 className="font-playfair font-bold text-2xl md:text-3xl text-editorial-charcoal">
-            Key Terms to Know
-          </h2>
-        </div>
-        <div className="bg-editorial-cream shadow-lg p-8">
-          <p className="text-editorial-charcoal/60 font-light leading-relaxed text-center">
-            Key terms and definitions will be available when this module launches.
-          </p>
-        </div>
-      </section>
-
       {/* Podcast Section */}
       <section id="podcast" className="mb-24 scroll-mt-24">
         <div className="flex items-center gap-3 mb-6">
@@ -84,17 +76,17 @@ const Module2Page = () => {
         </div>
       </section>
 
-      {/* Resources Section */}
-      <section id="resources" className="mb-24 scroll-mt-24">
+      {/* Key Terms Section */}
+      <section id="keyterms" className="mb-24 scroll-mt-24">
         <div className="flex items-center gap-3 mb-6">
-          <BookOpenIcon className="h-6 w-6 text-editorial-charcoal flex-shrink-0" />
+          <ChatBubbleLeftIcon className="h-5 w-5 text-editorial-charcoal flex-shrink-0" />
           <h2 className="font-playfair font-bold text-2xl md:text-3xl text-editorial-charcoal">
-            Want more?
+            Key Terms to Know
           </h2>
         </div>
         <div className="bg-editorial-cream shadow-lg p-8">
-          <p className="text-editorial-charcoal/60 font-light leading-relaxed">
-            Additional resources and reading materials will be provided when this module is complete.
+          <p className="text-editorial-charcoal/60 font-light leading-relaxed text-center">
+            Key terms and definitions will be available when this module launches.
           </p>
         </div>
       </section>
@@ -109,7 +101,7 @@ const Module2Page = () => {
             </h2>
           </div>
           <p className="text-editorial-cream font-light leading-relaxed mb-6">
-            Interactive practice tools will be available when this module launches. In the meantime, 
+            Interactive practice tools will be available when this module launches. In the meantime,
             check out our other tools to start building your critical thinking skills.
           </p>
           <Link
@@ -120,7 +112,24 @@ const Module2Page = () => {
           </Link>
         </div>
       </section>
-    </ModuleLayout>
+
+      {/* Resources Section */}
+      <section id="resources" className="mb-24 scroll-mt-24">
+        <div className="flex items-center gap-3 mb-6">
+          <BookOpenIcon className="h-6 w-6 text-editorial-charcoal flex-shrink-0" />
+          <h2 className="font-playfair font-bold text-2xl md:text-3xl text-editorial-charcoal">
+            Want more?
+          </h2>
+        </div>
+        <div className="bg-editorial-cream shadow-lg p-8">
+          <p className="text-editorial-charcoal/60 font-light leading-relaxed">
+            Additional resources and reading materials will be provided when this module is complete.
+          </p>
+        </div>
+      </section>
+        </ModuleLayout>
+      </div>
+    </>
   );
 };
 

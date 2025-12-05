@@ -26,10 +26,10 @@ const ModuleLayout = ({ moduleId, moduleTitle, children }) => {
   const quickNavItems = [
     { id: 'intro', label: 'Introduction' },
     { id: 'video', label: 'Watch' },
-    { id: 'keyterms', label: 'Key Terms' },
     { id: 'podcast', label: 'Listen' },
-    { id: 'resources', label: 'Explore' },
+    { id: 'keyterms', label: 'Key Terms' },
     { id: 'practice', label: 'Practice' },
+    { id: 'resources', label: 'Explore' },
   ];
 
   const scrollToSection = (sectionId) => {

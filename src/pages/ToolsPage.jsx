@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { XMarkIcon, MagnifyingGlassIcon, ExclamationTriangleIcon, LightBulbIcon, NewspaperIcon, AcademicCapIcon, ChartBarIcon } from '@heroicons/react/24/solid';
+import { XMarkIcon, MagnifyingGlassIcon, ExclamationTriangleIcon, LightBulbIcon, NewspaperIcon, AcademicCapIcon, ChartBarIcon, SparklesIcon } from '@heroicons/react/24/solid';
 import Footer from '../components/Footer';
 
 const ToolsPage = () => {
@@ -14,11 +14,27 @@ const ToolsPage = () => {
   const tools = [
     {
       id: 1,
-      title: 'Fallacy Detector',
+      title: 'System 1 Bingo',
+      icon: SparklesIcon,
+      color: '#41292c',
+      shortDescription: 'Test your awareness of cognitive biases',
+      fullDescription: 'System 1 Bingo is an interactive game that helps you recognize your own System 1 thinking patterns. Select scenarios you relate to, then reveal System 2 responses to learn how to think more critically.',
+      features: [
+        'Interactive 4x4 bingo grid',
+        'Real-world cognitive bias scenarios',
+        'System 2 thinking strategies',
+        'Flip cards to explore responses'
+      ],
+      status: 'Available',
+      link: '/bingo'
+    },
+    {
+      id: 2,
+      title: 'Headline Bias Detector',
       icon: ExclamationTriangleIcon,
-      color: '#6F1D1B',
+      color: '#2e5266',
       shortDescription: 'Identify logical fallacies in news headlines',
-      fullDescription: 'Our Fallacy Detector helps you recognize common logical fallacies in news headlines and articles. Learn to spot manipulation techniques and develop a more critical eye for media consumption.',
+      fullDescription: 'Our Headline Bias Detector helps you recognize common logical fallacies in news headlines and articles. Learn to spot manipulation techniques and develop a more critical eye for media consumption.',
       features: [
         'Real-time headline analysis',
         'Detailed fallacy explanations',
@@ -29,10 +45,10 @@ const ToolsPage = () => {
       link: '/articles'
     },
     {
-      id: 2,
+      id: 3,
       title: 'Bias Analyzer',
       icon: MagnifyingGlassIcon,
-      color: '#2e5266',
+      color: '#41292c',
       shortDescription: 'Detect bias and framing in media content',
       fullDescription: 'The Bias Analyzer examines news articles for political, cultural, and ideological biases. Understand how framing and word choice influence perception and learn to read between the lines.',
       features: [
@@ -45,10 +61,10 @@ const ToolsPage = () => {
       link: null
     },
     {
-      id: 3,
+      id: 4,
       title: 'Fact Checker',
       icon: NewspaperIcon,
-      color: '#41292c',
+      color: '#402039',
       shortDescription: 'Verify claims with credible sources',
       fullDescription: 'Cross-reference claims with verified databases and credible sources. Learn the fundamentals of fact-checking and develop skills to verify information independently.',
       features: [
@@ -61,10 +77,10 @@ const ToolsPage = () => {
       link: null
     },
     {
-      id: 4,
+      id: 5,
       title: 'Argument Mapper',
       icon: ChartBarIcon,
-      color: '#402039',
+      color: '#6F1D1B',
       shortDescription: 'Visualize logical argument structures',
       fullDescription: 'Break down complex arguments into visual diagrams. Identify premises, conclusions, and logical connections to better understand and evaluate reasoning.',
       features: [
@@ -77,10 +93,10 @@ const ToolsPage = () => {
       link: null
     },
     {
-      id: 5,
+      id: 6,
       title: 'Critical Reading Guide',
       icon: AcademicCapIcon,
-      color: '#6F1D1B',
+      color: '#2e5266',
       shortDescription: 'Step-by-step media literacy framework',
       fullDescription: 'A comprehensive guide to critical reading and media analysis. Follow structured frameworks to evaluate sources, identify techniques, and form well-reasoned conclusions.',
       features: [
@@ -92,22 +108,6 @@ const ToolsPage = () => {
       status: 'Coming Soon',
       link: null
     },
-    {
-      id: 6,
-      title: 'Rhetoric Decoder',
-      icon: LightBulbIcon,
-      color: '#2e5266',
-      shortDescription: 'Understand persuasive techniques',
-      fullDescription: 'Learn to recognize rhetorical devices and persuasive techniques used in media. From ethos to pathos, understand how language shapes opinion and influences decision-making.',
-      features: [
-        'Rhetorical device identification',
-        'Persuasion technique analysis',
-        'Emotional appeal detection',
-        'Interactive examples'
-      ],
-      status: 'Coming Soon',
-      link: null
-    }
   ];
 
   const handleTileClick = (tool) => {
@@ -165,13 +165,13 @@ const ToolsPage = () => {
   return (
     <div className="bg-beige-100 min-h-screen">
       {/* Hero Section */}
-      <section className="hero-background-pattern py-24 md:py-32 shadow-md">
+      <section className="py-24 md:py-32 shadow-md">
         <div className="container mx-auto px-6 max-w-7xl text-center">
           <h1 className="font-playfair font-bold text-6xl md:text-8xl text-editorial-charcoal mb-6">
-            Critical Thinking Tools
+            Train your Brain
           </h1>
           <p className="font-light text-lg md:text-2xl text-editorial-charcoal max-w-3xl mx-auto">
-            Explore our suite of interactive tools designed to sharpen your media literacy skills and develop critical thinking habits.
+            Explore tools designed to develop your critical thinking habits and sharpen your radar for manipulation from various sources (including your own brain!)
           </p>
         </div>
       </section>
@@ -185,7 +185,7 @@ const ToolsPage = () => {
               return (
                 <motion.div
                   key={tool.id}
-                  className="relative bg-editorial-cream border-2 border-editorial-charcoal shadow-lg cursor-pointer overflow-hidden group"
+                  className="relative bg-editorial-cream shadow-lg cursor-pointer overflow-hidden group"
                   variants={tileVariants}
                   initial="initial"
                   animate="animate"
@@ -215,30 +215,30 @@ const ToolsPage = () => {
                     </span>
                   </div>
 
-                  {/* Icon Section */}
-                  <div
-                    className="p-8 flex items-center justify-center transition-colors duration-300"
-                    style={{ backgroundColor: tool.color }}
-                  >
-                    <IconComponent className="h-20 w-20 text-editorial-cream" />
-                  </div>
+                  {/* Blurred Content Wrapper */}
+                  <div className={index > 1 ? 'blur-sm opacity-60' : ''}>
+                    {/* Icon Section */}
+                    <div
+                      className="p-8 flex items-center justify-center"
+                      style={{ backgroundColor: tool.color }}
+                    >
+                      <IconComponent className="h-20 w-20 text-editorial-cream" />
+                    </div>
 
-                  {/* Content Section */}
-                  <div className="p-6">
-                    <h3 className="font-playfair font-bold text-2xl text-editorial-charcoal mb-3">
-                      {tool.title}
-                    </h3>
-                    <p className="font-light text-editorial-charcoal text-sm mb-4">
-                      {tool.shortDescription}
-                    </p>
-                    <div className="flex items-center text-editorial-orange font-mono text-sm font-semibold group-hover:font-bold transition-all">
-                      {tool.link ? 'Try Now' : 'Learn More'}
-                      <span className="ml-2 transform group-hover:translate-x-1 transition-transform">→</span>
+                    {/* Content Section */}
+                    <div className="p-6">
+                      <h3 className="font-playfair font-bold text-2xl text-editorial-charcoal mb-3">
+                        {tool.title}
+                      </h3>
+                      <p className="font-light text-editorial-charcoal text-base md:text-lg mb-4">
+                        {tool.shortDescription}
+                      </p>
+                      <div className="flex items-center text-editorial-orange font-mono text-sm font-semibold transition-all">
+                        {tool.link ? 'Try Now' : 'Learn More'}
+                        <span className="ml-2 transform group-hover:translate-x-1 transition-transform">→</span>
+                      </div>
                     </div>
                   </div>
-
-                  {/* Hover Overlay */}
-                  <div className="absolute inset-0 bg-editorial-orange opacity-0 group-hover:opacity-10 transition-opacity duration-300 pointer-events-none"></div>
                 </motion.div>
               );
             })}

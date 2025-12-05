@@ -1,18 +1,54 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BookOpenIcon, WrenchScrewdriverIcon, CheckCircleIcon, ChevronDownIcon, ChevronUpIcon, EyeIcon, SpeakerWaveIcon, ChatBubbleLeftIcon, CogIcon } from '@heroicons/react/24/solid';
 import Footer from '../components/Footer';
+import CourseWelcomeModal from '../components/CourseWelcomeModal';
 
 const Module1Page = () => {
+  const location = useLocation();
   const [activeSection, setActiveSection] = useState('intro');
   const [modulesExpanded, setModulesExpanded] = useState(false);
   const [quickNavExpanded, setQuickNavExpanded] = useState(true);
+
+  // Progressive unlock state
+  const [unlockedSections, setUnlockedSections] = useState(['intro']);
+  const [videoWatched, setVideoWatched] = useState(false);
+  const [audioListened, setAudioListened] = useState(false);
+
+  // Modal state
+  const [showModal, setShowModal] = useState(false);
 
   // Scroll to top when component mounts
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  // Show modal if navigating from home page
+  useEffect(() => {
+    if (location.state?.fromHome) {
+      setShowModal(true);
+    }
+  }, [location]);
+
+  // Unlock next section
+  const unlockNextSection = (currentSection) => {
+    const sectionOrder = ['intro', 'video', 'podcast', 'keyterms', 'practice', 'resources'];
+    const currentIndex = sectionOrder.indexOf(currentSection);
+    if (currentIndex < sectionOrder.length - 1) {
+      const nextSection = sectionOrder[currentIndex + 1];
+      if (!unlockedSections.includes(nextSection)) {
+        setUnlockedSections([...unlockedSections, nextSection]);
+      }
+      // Scroll to next section
+      setTimeout(() => {
+        const element = document.getElementById(nextSection);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    }
+  };
 
   const modules = [
     { id: 1, title: 'Understand Core Concepts', available: true, current: true },
@@ -56,15 +92,18 @@ const Module1Page = () => {
   };
 
   return (
-    <div className="bg-beige-100 min-h-screen">
-      <div className="container mx-auto px-4 py-8 lg:py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          
-          {/* Left Sidebar - Module Navigation */}
-          <aside className="lg:col-span-1">
-            <div className="sticky top-24 bg-white shadow-lg p-6">
-              {/* Course Modules Section */}
-              <div>
+    <>
+      <CourseWelcomeModal isOpen={showModal} onClose={() => setShowModal(false)} />
+
+      <div className="bg-beige-100 min-h-screen">
+        <div className="container mx-auto px-4 py-8 lg:py-12">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+
+            {/* Left Sidebar - Module Navigation */}
+            <aside className="lg:col-span-1">
+              <div className="sticky top-24 bg-white shadow-lg p-6">
+                {/* Course Modules Section */}
+                <div>
                 <button
                   onClick={() => setModulesExpanded(!modulesExpanded)}
                   className="w-full flex items-center justify-between mb-4 group"
@@ -194,14 +233,6 @@ const Module1Page = () => {
                         Watch
                       </button>
                       <button
-                        onClick={() => scrollToSection('keyterms')}
-                        className={`block w-full text-left text-sm font-mono hover:text-editorial-orange transition-colors ${
-                          activeSection === 'keyterms' ? 'text-editorial-orange font-bold' : 'text-editorial-charcoal'
-                        }`}
-                      >
-                        Key Terms
-                      </button>
-                      <button
                         onClick={() => scrollToSection('podcast')}
                         className={`block w-full text-left text-sm font-mono hover:text-editorial-orange transition-colors ${
                           activeSection === 'podcast' ? 'text-editorial-orange font-bold' : 'text-editorial-charcoal'
@@ -210,12 +241,12 @@ const Module1Page = () => {
                         Listen
                       </button>
                       <button
-                        onClick={() => scrollToSection('resources')}
+                        onClick={() => scrollToSection('keyterms')}
                         className={`block w-full text-left text-sm font-mono hover:text-editorial-orange transition-colors ${
-                          activeSection === 'resources' ? 'text-editorial-orange font-bold' : 'text-editorial-charcoal'
+                          activeSection === 'keyterms' ? 'text-editorial-orange font-bold' : 'text-editorial-charcoal'
                         }`}
                       >
-                        Explore
+                        Key Terms
                       </button>
                       <button
                         onClick={() => scrollToSection('practice')}
@@ -224,6 +255,14 @@ const Module1Page = () => {
                         }`}
                       >
                         Practice
+                      </button>
+                      <button
+                        onClick={() => scrollToSection('resources')}
+                        className={`block w-full text-left text-sm font-mono hover:text-editorial-orange transition-colors ${
+                          activeSection === 'resources' ? 'text-editorial-orange font-bold' : 'text-editorial-charcoal'
+                        }`}
+                      >
+                        Explore
                       </button>
                     </motion.nav>
                   ) : (
@@ -257,11 +296,11 @@ const Module1Page = () => {
             {/* Header */}
             <div className="mb-12">
               <div className="flex items-center gap-3 mb-4">
-                <span className="text-sm font-mono text-editorial-orange">Module 1</span>
+                <span className="text-sm font-mono text-editorial-orange">Module 1: Core Concepts</span>
                 <span className="h-px flex-1 bg-editorial-charcoal/20"></span>
               </div>
               <h1 className="font-playfair font-bold text-4xl md:text-6xl text-editorial-charcoal mb-6">
-                Understand Core Concepts
+                The "Thinking" in Critical Thinking
               </h1>
             </div>
 
@@ -269,224 +308,295 @@ const Module1Page = () => {
             <section id="intro" className="mb-24 scroll-mt-24">
               <div className="bg-editorial-orange shadow-lg p-8">
                 <h2 className="font-playfair font-bold text-2xl md:text-3xl text-editorial-cream mb-6">
-                  Why am I here?
+                  Your brain is amazing, but flawed.
                 </h2>
                 <div className="space-y-4 text-editorial-cream font-light leading-relaxed text-lg">
                   <p>
-                    Understanding logical fallacies and cognitive biases is the foundation of critical thinking.
-                    In this module, you'll learn to recognize the most common errors in reasoning and the mental
-                    shortcuts that can lead us astray.
+                    In order to be in the right mindset to think critically (and learn something new) you should understand how your brain operates. Thousand of years of evolution have shaped our thought processes in a certain way, so it's no surprise that behaving against this requires effort and regular training. We're here to help you get started on that journey!
                   </p>
                   <div className="bg-editorial-cream/20 border-l-4 border-editorial-cream p-4 mt-6">
                     <p className="font-normal text-sm text-editorial-cream">
-                      <strong>Learning Objectives:</strong> Identify common logical fallacies • Understand cognitive biases
-                      • Apply critical thinking to real-world examples • Practice with interactive tools
+                      <strong>Learning Objectives:</strong> Understand how your brain thinks and learns • Appreciate the importance of critical thinking • Acknowledge the training it requires
                     </p>
                   </div>
+                </div>
+                <div className="mt-6 flex justify-end">
+                  <button
+                    onClick={() => unlockNextSection('intro')}
+                    className="bg-editorial-cream text-editorial-orange border-2 border-editorial-cream font-mono hover:bg-editorial-charcoal hover:text-editorial-cream hover:border-editorial-charcoal text-sm py-3 px-8 transition-all transform hover:scale-105"
+                  >
+                    Next: Watch Video →
+                  </button>
                 </div>
               </div>
             </section>
 
             {/* Video Section */}
-            <section id="video" className="mb-24 scroll-mt-24">
-              <div className="flex items-center gap-3 mb-6">
-                <EyeIcon className="h-6 w-6 text-editorial-charcoal flex-shrink-0" />
-                <h2 className="font-playfair font-bold text-2xl md:text-3xl text-editorial-charcoal">
-                  Watch: Introduction to Logical Fallacies
-                </h2>
-              </div>
-              <div className="shadow-lg overflow-hidden">
-                <div className="aspect-video">
-                  <iframe
-                    width="100%"
-                    height="100%"
-                    src="https://www.youtube.com/embed/nYYkRaU0xh8"
-                    title="YouTube video player"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                    className="w-full h-full"
-                  ></iframe>
-                </div>
-                <div className="p-6 bg-editorial-charcoal">
-                  <h3 className="font-playfair font-bold text-xl text-editorial-cream mb-3">
-                    Understanding Logical Fallacies
-                  </h3>
-                  <p className="text-editorial-cream/60 font-light leading-relaxed">
-                    This video introduces the most common logical fallacies you'll encounter in everyday media.
-                    Learn to spot ad hominem attacks, straw man arguments, false dichotomies, and more through
-                    real-world examples.
-                  </p>
-                </div>
-              </div>
-            </section>
-
-            {/* Key Terms Section */}
-            <section id="keyterms" className="mb-24 scroll-mt-24">
-              <div className="flex items-center gap-3 mb-6">
-                <ChatBubbleLeftIcon className="h-5 w-5 text-editorial-charcoal flex-shrink-0" />
-                <h2 className="font-playfair font-bold text-2xl md:text-3xl text-editorial-charcoal">
-                  Key Terms to Know
-                </h2>
-              </div>
-              <p className="text-editorial-charcoal font-light leading-relaxed mb-8">
-                Click each card to reveal the definition of important concepts in critical thinking.
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <DefinitionCard
-                  term="Logic"
-                  definition="The systematic study of valid reasoning and inference. Logic helps us distinguish between sound arguments and flawed ones by examining the structure and relationships between premises and conclusions."
-                  color="#6F1D1B"
-                />
-                <DefinitionCard
-                  term="Rational"
-                  definition="Based on reason, facts, and logical thinking rather than emotions or opinions. A rational approach involves evaluating evidence objectively and drawing conclusions that follow logically from available information."
-                  color="#2e5266"
-                />
-                <DefinitionCard
-                  term="Critical Thinking"
-                  definition="The disciplined process of actively analyzing, synthesizing, and evaluating information to reach well-reasoned conclusions. It involves questioning assumptions, identifying biases, and considering alternative perspectives."
-                  color="#d4a574"
-                />
-                <DefinitionCard
-                  term="Cognitive Bias"
-                  definition="Systematic patterns of deviation from rational judgment that occur due to the way our brains process information. These mental shortcuts can lead to errors in thinking, perception, and decision-making."
-                  color="#8b4513"
-                />
-                <DefinitionCard
-                  term="Fallacy"
-                  definition="An error in reasoning that undermines the logic of an argument. Fallacies can be intentional (used to manipulate) or unintentional, and recognizing them is essential for critical analysis of claims and arguments."
-                  color="#c44536"
-                />
-                <DefinitionCard
-                  term="Systems 1 and 2 Thinking"
-                  definition="Two modes of thought identified by Daniel Kahneman: System 1 is fast, automatic, and intuitive; System 2 is slow, deliberate, and analytical. Understanding both helps us recognize when we need to engage deeper critical thinking."
-                  color="#4a5859"
-                />
-              </div>
-            </section>
-
-            {/* Podcast Section */}
-            <section id="podcast" className="mb-24 scroll-mt-24">
-              <div className="flex items-center gap-3 mb-6">
-                <SpeakerWaveIcon className="h-6 w-6 text-editorial-charcoal flex-shrink-0" />
-                <h2 className="font-playfair font-bold text-2xl md:text-3xl text-editorial-charcoal">
-                  Listen: dgergerqg
-                </h2>
-              </div>
-              <div className="shadow-lg overflow-hidden">
-                <iframe
-                  src="https://open.spotify.com/embed/episode/08M6pzHcv8mH5eZcQLBkIT?utm_source=generator"
-                  width="100%"
-                  height="352"
-                  frameBorder="0"
-                  allowFullScreen=""
-                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                  loading="lazy"
-                ></iframe>
-                <div className="bg-editorial-cream p-6">
-                  <p className="text-editorial-charcoal/60 font-light text-sm mb-4">
-                    Listen on other platforms:
-                  </p>
-                  <div className="flex flex-wrap gap-3">
-                    <a
-                      href="https://podcasts.apple.com/podcast/id1234567890"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-block bg-editorial-charcoal text-editorial-cream font-mono text-xs py-2 px-4 hover:bg-editorial-orange transition-colors"
-                    >
-                      Apple Podcasts
-                    </a>
-                    <a
-                      href="https://podcasts.google.com/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-block bg-editorial-charcoal text-editorial-cream font-mono text-xs py-2 px-4 hover:bg-editorial-orange transition-colors"
-                    >
-                      Google Podcasts
-                    </a>
-                    <a
-                      href="https://www.youtube.com/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-block bg-editorial-charcoal text-editorial-cream font-mono text-xs py-2 px-4 hover:bg-editorial-orange transition-colors"
-                    >
-                      YouTube
-                    </a>
-                    <a
-                      href="https://overcast.fm/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-block bg-editorial-charcoal text-editorial-cream font-mono text-xs py-2 px-4 hover:bg-editorial-orange transition-colors"
-                    >
-                      Overcast
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            {/* Resources Section */}
-            <section id="resources" className="mb-24 scroll-mt-24">
-              <div className="flex items-center gap-3 mb-6">
-                <BookOpenIcon className="h-6 w-6 text-editorial-charcoal flex-shrink-0" />
-                <h2 className="font-playfair font-bold text-2xl md:text-3xl text-editorial-charcoal">
-                  Want more?
-                </h2>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {resources.map((resource, index) => (
-                  <motion.a
-                    key={index}
-                    href={resource.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-editorial-cream shadow-lg p-6 hover:shadow-xl transition-all group"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <div className="flex items-start justify-between mb-3">
-                      <span className="text-xs font-mono bg-editorial-orange text-editorial-cream px-2 py-1">
-                        {resource.type}
-                      </span>
-                      <span className="text-editorial-orange group-hover:translate-x-1 transition-transform">→</span>
-                    </div>
-                    <h3 className="font-playfair font-bold text-lg text-editorial-charcoal mb-2">
-                      {resource.title}
-                    </h3>
-                    <p className="text-sm font-mono text-editorial-charcoal/60 mb-3">
-                      {resource.author}
-                    </p>
-                    <p className="text-sm font-light text-editorial-charcoal">
-                      {resource.description}
-                    </p>
-                  </motion.a>
-                ))}
-              </div>
-            </section>
-
-            {/* Practice Tool Section */}
-            <section id="practice" className="mb-24 scroll-mt-24">
-              <div className="bg-editorial-orange shadow-lg p-8">
-                <div className="flex items-center gap-2 mb-4">
-                  <CogIcon className="h-8 w-8 text-editorial-cream flex-shrink-0" />
-                  <h2 className="font-playfair font-bold text-2xl md:text-3xl text-editorial-cream">
-                    Time to practice!
+            {unlockedSections.includes('video') ? (
+              <section id="video" className="mb-24 scroll-mt-24">
+                <div className="flex items-center gap-3 mb-6">
+                  <EyeIcon className="h-6 w-6 text-editorial-charcoal flex-shrink-0" />
+                  <h2 className="font-playfair font-bold text-2xl md:text-3xl text-editorial-charcoal">
+                    Watch: Systems 1 and 2 Thinking explained
                   </h2>
                 </div>
-                <p className="text-editorial-cream font-light leading-relaxed mb-6">
-                  Put your knowledge into practice! Use our Fallacy Detector to analyze real news headlines 
-                  and identify logical fallacies. This interactive tool provides instant feedback and detailed 
-                  explanations to help you sharpen your critical thinking skills.
-                </p>
-                <Link
-                  to="/articles"
-                  className="inline-block bg-editorial-cream text-editorial-orange border-2 border-editorial-cream font-mono hover:bg-editorial-charcoal hover:text-editorial-cream hover:border-editorial-charcoal text-sm py-3 px-8 transition-all transform hover:scale-105"
-                >
-                  Try the Fallacy Detector →
-                </Link>
-              </div>
-            </section>
+                <div className="shadow-lg overflow-hidden">
+                  <div className="aspect-video">
+                    <iframe
+                      width="100%"
+                      height="100%"
+                      src="https://www.youtube.com/embed/UBVV8pch1dM"
+                      title="YouTube video player"
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                      className="w-full h-full"
+                      onLoad={() => setVideoWatched(true)}
+                    ></iframe>
+                  </div>
+                  <div className="p-6 bg-editorial-charcoal">
+                    <h3 className="font-playfair font-bold text-xl text-editorial-cream mb-3">
+                      The Science of Thinking
+                    </h3>
+                    <p className="text-editorial-cream/60 font-light leading-relaxed mb-4">
+                      Here Veritasium nicely explains the "two personalities" (or thinking systems) in our brains. As you watch you might consider recent situations where you switched (or should have switched) between the two modes. And as someone who's here to learn, maybe you'll better appreciate the effort learning requires and think about it the next time you fall into old habits or get frustrated.
+                    </p>
+                    {videoWatched && (
+                      <div className="flex justify-end mt-4">
+                        <button
+                          onClick={() => unlockNextSection('video')}
+                          className="bg-editorial-cream text-editorial-charcoal border-2 border-editorial-cream font-mono hover:bg-editorial-orange hover:text-editorial-cream hover:border-editorial-orange text-sm py-3 px-8 transition-all transform hover:scale-105"
+                        >
+                          Next: Listen to Audio →
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </section>
+            ) : (
+              <section id="video" className="mb-24 scroll-mt-24">
+                <div className="bg-editorial-charcoal/10 shadow-lg p-8 text-center">
+                  <div className="opacity-40">
+                    <EyeIcon className="h-12 w-12 text-editorial-charcoal mx-auto mb-4" />
+                    <h3 className="font-playfair font-bold text-xl text-editorial-charcoal mb-2">
+                      Watch: Systems 1 and 2 Thinking explained
+                    </h3>
+                    <p className="text-editorial-charcoal/60 font-mono text-sm">
+                      Complete the previous section to unlock
+                    </p>
+                  </div>
+                </div>
+              </section>
+            )}
+
+            {/* Podcast Section */}
+            {unlockedSections.includes('podcast') ? (
+              <section id="podcast" className="mb-24 scroll-mt-24">
+                <div className="flex items-center gap-3 mb-6">
+                  <SpeakerWaveIcon className="h-6 w-6 text-editorial-charcoal flex-shrink-0" />
+                  <h2 className="font-playfair font-bold text-2xl md:text-3xl text-editorial-charcoal">
+                    Listen: What is Critical Thinking?
+                  </h2>
+                </div>
+                <div className="shadow-lg overflow-hidden bg-editorial-charcoal">
+                  <div className="relative bg-editorial-charcoal p-8 flex items-center justify-center" style={{ minHeight: '120px' }}>
+                    <div className="w-full max-w-3xl">
+                      <audio
+                        controls
+                        className="w-full"
+                        onPlay={() => setAudioListened(true)}
+                      >
+                        <source src="/critical-thinking.mp3" type="audio/mpeg" />
+                        Your browser does not support the audio element.
+                      </audio>
+                    </div>
+                  </div>
+                  <div className="p-6 bg-editorial-charcoal border-t border-editorial-cream/20">
+                    <h3 className="font-playfair font-bold text-xl text-editorial-cream mb-3">
+                      An Expert Psychologist Explains Critical Thinking
+                    </h3>
+                    <p className="text-editorial-cream/60 font-light leading-relaxed mb-4">
+                      Psychologist Diane Halpern on what critical thinking is, how this skill should be taught and why it is key to thriving in a fast-changing world. We'll dive deeper into the elements of critical thinking in the next modules.
+                    </p>
+                    {audioListened && (
+                      <div className="flex justify-end mt-4">
+                        <button
+                          onClick={() => unlockNextSection('podcast')}
+                          className="bg-editorial-cream text-editorial-charcoal border-2 border-editorial-cream font-mono hover:bg-editorial-orange hover:text-editorial-cream hover:border-editorial-orange text-sm py-3 px-8 transition-all transform hover:scale-105"
+                        >
+                          Next: Key Terms →
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </section>
+            ) : (
+              <section id="podcast" className="mb-24 scroll-mt-24">
+                <div className="bg-editorial-charcoal/10 shadow-lg p-8 text-center">
+                  <div className="opacity-40">
+                    <SpeakerWaveIcon className="h-12 w-12 text-editorial-charcoal mx-auto mb-4" />
+                    <h3 className="font-playfair font-bold text-xl text-editorial-charcoal mb-2">
+                      Listen: What is Critical Thinking?
+                    </h3>
+                    <p className="text-editorial-charcoal/60 font-mono text-sm">
+                      Complete the previous section to unlock
+                    </p>
+                  </div>
+                </div>
+              </section>
+            )}
+
+            {/* Key Terms Section */}
+            {unlockedSections.includes('keyterms') ? (
+              <section id="keyterms" className="mb-24 scroll-mt-24">
+                <div className="flex items-center gap-3 mb-6">
+                  <ChatBubbleLeftIcon className="h-5 w-5 text-editorial-charcoal flex-shrink-0" />
+                  <h2 className="font-playfair font-bold text-2xl md:text-3xl text-editorial-charcoal">
+                    Three Key Terms to Know
+                  </h2>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <DefinitionCard
+                    term="Critical Thinking"
+                    definition="The disciplined process of actively analyzing, synthesizing, and evaluating information to reach well-reasoned conclusions. It involves questioning assumptions, identifying biases, and considering alternative perspectives."
+                    color="#d4a574"
+                  />
+                  <DefinitionCard
+                    term="Systems 1 and 2 Thinking"
+                    definition="Two modes of thought identified by Daniel Kahneman: System 1 is fast, automatic, and intuitive; System 2 is slow, deliberate, and analytical. Understanding both helps us recognize when we need to engage deeper critical thinking."
+                    color="#4a5859"
+                  />
+                  <DefinitionCard
+                    term="Rational"
+                    definition="Based on reason, facts, and logical thinking rather than emotions or opinions. A rational approach involves evaluating evidence objectively and drawing conclusions that follow logically from available information."
+                    color="#2e5266"
+                  />
+                </div>
+                <div className="flex justify-end mt-6">
+                  <button
+                    onClick={() => unlockNextSection('keyterms')}
+                    className="bg-editorial-charcoal text-editorial-cream border-2 border-editorial-charcoal font-mono hover:bg-editorial-orange hover:text-editorial-cream hover:border-editorial-orange text-sm py-3 px-8 transition-all transform hover:scale-105"
+                  >
+                    Next: Practice & Explore →
+                  </button>
+                </div>
+              </section>
+            ) : (
+              <section id="keyterms" className="mb-24 scroll-mt-24">
+                <div className="bg-editorial-charcoal/10 shadow-lg p-8 text-center">
+                  <div className="opacity-40">
+                    <ChatBubbleLeftIcon className="h-12 w-12 text-editorial-charcoal mx-auto mb-4" />
+                    <h3 className="font-playfair font-bold text-xl text-editorial-charcoal mb-2">
+                      Three Key Terms to Know
+                    </h3>
+                    <p className="text-editorial-charcoal/60 font-mono text-sm">
+                      Complete the previous section to unlock
+                    </p>
+                  </div>
+                </div>
+              </section>
+            )}
+
+            {/* Practice Tool Section & Resources Section - Unlocked Together */}
+            {unlockedSections.includes('practice') ? (
+              <>
+                <section id="practice" className="mb-24 scroll-mt-24">
+                  <div className="bg-editorial-orange shadow-lg p-8">
+                    <div className="flex items-center gap-2 mb-4">
+                      <CogIcon className="h-8 w-8 text-editorial-cream flex-shrink-0" />
+                      <h2 className="font-playfair font-bold text-2xl md:text-3xl text-editorial-cream">
+                        Time to practice!
+                      </h2>
+                    </div>
+                    <p className="text-editorial-cream font-light leading-relaxed mb-6">
+                      Put your knowledge into practice! Test your understanding of System 1 and System 2 thinking
+                      with our interactive Bingo game, or use our Fallacy Detector to analyze real news headlines
+                      and identify logical fallacies.
+                    </p>
+                    <div className="flex flex-wrap gap-4">
+                      <a
+                        href="/bingo"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block bg-editorial-cream text-editorial-orange border-2 border-editorial-cream font-mono hover:bg-editorial-charcoal hover:text-editorial-cream hover:border-editorial-charcoal text-sm py-3 px-8 transition-all transform hover:scale-105"
+                      >
+                        Play System 1 Bingo →
+                      </a>
+                    </div>
+                  </div>
+                </section>
+
+                <section id="resources" className="mb-24 scroll-mt-24">
+                  <div className="flex items-center gap-3 mb-6">
+                    <BookOpenIcon className="h-6 w-6 text-editorial-charcoal flex-shrink-0" />
+                    <h2 className="font-playfair font-bold text-2xl md:text-3xl text-editorial-charcoal">
+                      Want more?
+                    </h2>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {resources.map((resource, index) => (
+                      <motion.a
+                        key={index}
+                        href={resource.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="bg-editorial-cream shadow-lg p-6 hover:shadow-xl transition-all group"
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                      >
+                        <div className="flex items-start justify-between mb-3">
+                          <span className="text-xs font-mono bg-editorial-orange text-editorial-cream px-2 py-1">
+                            {resource.type}
+                          </span>
+                          <span className="text-editorial-orange group-hover:translate-x-1 transition-transform">→</span>
+                        </div>
+                        <h3 className="font-playfair font-bold text-lg text-editorial-charcoal mb-2">
+                          {resource.title}
+                        </h3>
+                        <p className="text-sm font-mono text-editorial-charcoal/60 mb-3">
+                          {resource.author}
+                        </p>
+                        <p className="text-sm font-light text-editorial-charcoal">
+                          {resource.description}
+                        </p>
+                      </motion.a>
+                    ))}
+                  </div>
+                </section>
+              </>
+            ) : (
+              <>
+                <section id="practice" className="mb-24 scroll-mt-24">
+                  <div className="bg-editorial-charcoal/10 shadow-lg p-8 text-center">
+                    <div className="opacity-40">
+                      <CogIcon className="h-12 w-12 text-editorial-charcoal mx-auto mb-4" />
+                      <h3 className="font-playfair font-bold text-xl text-editorial-charcoal mb-2">
+                        Time to practice!
+                      </h3>
+                      <p className="text-editorial-charcoal/60 font-mono text-sm">
+                        Complete the previous sections to unlock
+                      </p>
+                    </div>
+                  </div>
+                </section>
+
+                <section id="resources" className="mb-24 scroll-mt-24">
+                  <div className="bg-editorial-charcoal/10 shadow-lg p-8 text-center">
+                    <div className="opacity-40">
+                      <BookOpenIcon className="h-12 w-12 text-editorial-charcoal mx-auto mb-4" />
+                      <h3 className="font-playfair font-bold text-xl text-editorial-charcoal mb-2">
+                        Want more?
+                      </h3>
+                      <p className="text-editorial-charcoal/60 font-mono text-sm">
+                        Complete the previous sections to unlock
+                      </p>
+                    </div>
+                  </div>
+                </section>
+              </>
+            )}
 
             {/* Navigation Buttons */}
             <div className="flex justify-between items-center pt-8 border-t-2 border-editorial-charcoal/20">
@@ -506,6 +616,7 @@ const Module1Page = () => {
 
       <Footer />
     </div>
+    </>
   );
 };
 

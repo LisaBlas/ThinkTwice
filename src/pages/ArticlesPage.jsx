@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { FunnelIcon, XMarkIcon, WrenchScrewdriverIcon } from '@heroicons/react/24/solid';
+import { Link } from 'react-router-dom';
+import { FunnelIcon, XMarkIcon } from '@heroicons/react/24/solid';
 import axios from 'axios';
 import ArticleCard from '../components/ArticleCard';
 import FilterSection from '../components/FilterSection';
@@ -44,12 +45,14 @@ const ArticlesPage = () => {
 
   return (
     <div className="relative container mx-auto px-4 py-12 lg:py-20 lg:px-40 bg-beige-100">
-      <div className="flex items-center justify-between mb-8">
+      <div className="mb-8 relative">
+        <Link
+          to="/module/2"
+          className="absolute top-0 right-0 text-xs md:text-sm font-mono bg-editorial-orange text-editorial-cream border-2 border-editorial-orange hover:bg-editorial-charcoal hover:border-editorial-charcoal py-2 px-4 transition-all transform hover:scale-105"
+        >
+          Learn more in Module 2 →
+        </Link>
         <h1 className="text-4xl lg:text-6xl font-playfair font-bold text-editorial-charcoal">Fact or Fallacy - Headline Analyzer</h1>
-        <span className="ml-4 px-3 py-1 text-sm font-semibold bg-editorial-charcoal text-editorial-cream whitespace-nowrap inline-flex items-center gap-1">
-          <WrenchScrewdriverIcon className="h-4 w-4 mr-1" aria-hidden="true" />
-           New Tool!
-        </span>
       </div>
       {/* Subtle underline */}
       <div className="w-full h-px bg-gray-300 mb-12"></div> 
