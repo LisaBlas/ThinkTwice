@@ -1,7 +1,7 @@
 // Editorial Style ArticleCard Component
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { EyeIcon, XMarkIcon, MagnifyingGlassIcon, ExclamationTriangleIcon, CheckCircleIcon, LinkIcon } from '@heroicons/react/24/solid';
+import { EyeIcon, LinkIcon } from '@heroicons/react/24/solid';
 import fallacyDefinitions from '../../data/fallacy-definitions.json';
 
 const cardVariants = {
@@ -30,6 +30,16 @@ const revealedContentVariants = {
   exit: { opacity: 0, transition: { duration: 0.2, ease: 'easeInOut' } }
 };
 
+const classificationGroupColors = {
+  Framing: '#2e5266',
+  'Cognitive Bias': '#567568',
+  'Logical Fallacy': '#6F1D1B',
+};
+
+const getClassificationColor = (group) => {
+  return classificationGroupColors[group] || '#888888';
+};
+
 const ArticleCard = ({ article, index, darkMode = false }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isRevealed, setIsRevealed] = useState(false);
@@ -43,9 +53,13 @@ const ArticleCard = ({ article, index, darkMode = false }) => {
     image: '',
     content: 'No content to display.',
     url: '#',
+    sourceUrl: null,
     publishedAt: null,
     fallacy: 'N/A',
+    classificationGroup: null,
     explanation: 'No analysis available.',
+    originalPrimaryClassification: null,
+    secondaryClassification: null,
     additionalBiases: []
   };
 
@@ -85,19 +99,20 @@ const ArticleCard = ({ article, index, darkMode = false }) => {
         setFallacyColor(fallacyData.color || '#888888');
       } else {
         setFallacyDefinition('');
-        setFallacyColor('#888888');
+        setFallacyColor(getClassificationColor(currentArticle.classificationGroup));
       }
     } else {
       setFallacyDefinition('');
-      setFallacyColor('#888888');
+      setFallacyColor(getClassificationColor(currentArticle.classificationGroup));
     }
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [isRevealed, currentArticle.fallacy]);
+  }, [isRevealed, currentArticle.fallacy, currentArticle.classificationGroup]);
 
   const formatDate = (dateString) => {
+    if (currentArticle.dateLabel) return currentArticle.dateLabel.toUpperCase();
     if (!dateString) return 'Date N/A';
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', {
@@ -106,6 +121,8 @@ const ArticleCard = ({ article, index, darkMode = false }) => {
       day: 'numeric',
     }).toUpperCase();
   };
+
+  const sourceLink = currentArticle.url || currentArticle.sourceUrl;
 
   return (
     <motion.div
@@ -224,11 +241,29 @@ const ArticleCard = ({ article, index, darkMode = false }) => {
                 <div className="relative">
                   <p className="leading-medium mb-2 text-editorial-charcoal font-light">
                     {currentArticle.explanation}
-                    <a href={currentArticle.url} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()} className="inline-flex items-center ml-2 text-editorial-orange underline hover:text-editorial-charcoal transition-colors hover:font-semibold duration-200">
-                      <span className="mr-1">Read original article</span>
-                      <LinkIcon className="w-4 h-4" />
-                    </a>
+                    {sourceLink && (
+                      <a href={sourceLink} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()} className="inline-flex items-center ml-2 text-editorial-orange underline hover:text-editorial-charcoal transition-colors hover:font-semibold duration-200">
+                        <span className="mr-1">Visit original source</span>
+                        <LinkIcon className="w-4 h-4" />
+                      </a>
+                    )}
                   </p>
+                  {(currentArticle.classificationGroup || currentArticle.secondaryClassification) && (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4 font-mono text-xs">
+                      {currentArticle.classificationGroup && (
+                        <div className="border border-editorial-charcoal/20 p-3">
+                          <p className="uppercase text-editorial-charcoal/60 mb-1">Filter group</p>
+                          <p className="font-semibold text-editorial-charcoal">{currentArticle.classificationGroup}</p>
+                        </div>
+                      )}
+                      {currentArticle.secondaryClassification && (
+                        <div className="border border-editorial-charcoal/20 p-3">
+                          <p className="uppercase text-editorial-charcoal/60 mb-1">Secondary pattern</p>
+                          <p className="font-semibold text-editorial-charcoal">{currentArticle.secondaryClassification}</p>
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
               </div>
               

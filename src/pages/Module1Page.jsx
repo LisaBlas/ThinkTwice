@@ -306,7 +306,7 @@ const Module1Page = () => {
 
             {/* Introduction Section */}
             <section id="intro" className="mb-24 scroll-mt-24">
-              <div className="bg-editorial-orange shadow-lg p-8">
+              <div className="bg-editorial-charcoal shadow-lg p-8">
                 <h2 className="font-playfair font-bold text-2xl md:text-3xl text-editorial-cream mb-6">
                   Your brain is amazing, but flawed.
                 </h2>

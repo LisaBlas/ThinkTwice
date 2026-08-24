@@ -43,16 +43,11 @@ const CourseSpotlight = () => {
             <p className="text-lg mb-10 font-light">
               We're still hard at work perfecting the course - join the waitlist to be notified when it's ready. The first 20 curious minds will receive a discount code!
             </p>
-            <form className="flex flex-col md:flex-row items-left justify-left gap-4 max-w-xl">
-              <input
-                type="email"
-                placeholder="your.email@example.com"
-                className="w-full flex-grow px-6 py-3 text-xs sm:text-sm font-mono text-editorial-cream bg-editorial-orange border-2 border-editorial-cream rounded-none focus:outline-none focus:ring-2 focus:ring-editorial-cream"
-              />
-              <button type="submit" className="w-60 text-center text-editorial-orange border-editorial-orange bg-editorial-cream border-2 font-mono hover:bg-editorial-charcoal hover:border-editorial-charcoal hover:text-editorial-cream text-xs sm:text-sm py-2 px-4 transition-colors duration-100 transform hover:scale-105 shrink-0">
-                Join the Waitlist
-              </button>
-            </form>
+            <div className="flex items-left justify-left max-w-xl">
+              <a href="mailto:bleepbloopproducts@gmail.com?subject=Critical%20Thinking%20course%20interest" className="w-60 text-center text-editorial-orange border-editorial-orange bg-editorial-cream border-2 font-mono hover:bg-editorial-charcoal hover:border-editorial-charcoal hover:text-editorial-cream text-xs sm:text-sm py-2 px-4 transition-colors duration-100 transform hover:scale-105 shrink-0">
+                Express your interest and inspire us to keep going!
+              </a>
+            </div>
           </div>
 
           {/* Right side: Modules Tabs */}

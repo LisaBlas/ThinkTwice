@@ -9,7 +9,7 @@ const Footer = () => {
           
           {/* Column 1: Brand and Copyright */}
           <div className="md:col-span-1">
-            <h3 className="font-playfair text-4xl font-semibold text-editorial-cream">Doublethink</h3>
+            <h3 className="font-playfair text-4xl font-semibold text-editorial-cream">ThinkTwice</h3>
             <p className="font-light text-editorial-cream mt-4">&copy; {new Date().getFullYear()} All Rights Reserved.</p>
           </div>
 

@@ -17,13 +17,13 @@ const ToolsPage = () => {
       title: 'System 1 Bingo',
       icon: SparklesIcon,
       color: '#41292c',
-      shortDescription: 'Test your awareness of cognitive biases',
-      fullDescription: 'System 1 Bingo is an interactive game that helps you recognize your own System 1 thinking patterns. Select scenarios you relate to, then reveal System 2 responses to learn how to think more critically.',
+      shortDescription: 'Sort everyday reactions into System 1 and System 2',
+      fullDescription: 'System 1 Bingo is an interactive sorting game that trains you to spot fast, automatic thinking in everyday situations. Select the System 1 cards, reveal the answers, and inspect the bias or fallacy behind each reaction.',
       features: [
-        'Interactive 4x4 bingo grid',
-        'Real-world cognitive bias scenarios',
-        'System 2 thinking strategies',
-        'Flip cards to explore responses'
+        'Three rounds of 16 relatable situations',
+        'System 1 and System 2 reaction sorting',
+        'Results with missed and false selections',
+        'Flip cards to reveal bias and fallacy notes'
       ],
       status: 'Available',
       link: '/bingo'
@@ -33,13 +33,13 @@ const ToolsPage = () => {
       title: 'Headline Bias Detector',
       icon: ExclamationTriangleIcon,
       color: '#2e5266',
-      shortDescription: 'Identify logical fallacies in news headlines',
-      fullDescription: 'Our Headline Bias Detector helps you recognize common logical fallacies in news headlines and articles. Learn to spot manipulation techniques and develop a more critical eye for media consumption.',
+      shortDescription: 'Explore bias and framing in international headlines',
+      fullDescription: 'Our Headline Bias Detector helps you recognize common framing patterns, rhetorical devices, and fallacy-adjacent techniques in international English-language news headlines.',
       features: [
-        'Real-time headline analysis',
-        'Detailed fallacy explanations',
+        'Curated international headline dataset',
+        'Three simple classification labels',
         'Interactive learning experience',
-        'Filter by fallacy type'
+        'Filter by outlet, topic and classification'
       ],
       status: 'Available',
       link: '/articles'
@@ -235,7 +235,7 @@ const ToolsPage = () => {
                       </p>
                       <div className="flex items-center text-editorial-orange font-mono text-sm font-semibold transition-all">
                         {tool.link ? 'Try Now' : 'Learn More'}
-                        <span className="ml-2 transform group-hover:translate-x-1 transition-transform">→</span>
+                        <span className="ml-2 transform group-hover:translate-x-1 transition-transform">-&gt;</span>
                       </div>
                     </div>
                   </div>
@@ -312,7 +312,7 @@ const ToolsPage = () => {
                 <ul className="space-y-3 mb-8">
                   {selectedTool.features.map((feature, index) => (
                     <li key={index} className="flex items-start">
-                      <span className="text-editorial-orange mr-3 mt-1">✓</span>
+                      <span className="text-editorial-orange mr-3 mt-1">OK</span>
                       <span className="text-editorial-charcoal">{feature}</span>
                     </li>
                   ))}

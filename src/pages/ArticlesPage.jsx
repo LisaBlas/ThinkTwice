@@ -12,10 +12,10 @@ const ArticlesPage = () => {
   const [error, setError] = useState(null);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [activeFilters, setActiveFilters] = useState({
-    date: null,
+    year: null,
     source: null,
-    fallacy: null,
     topic: null,
+    classification: null,
   });
 
   // Scroll to top when component mounts
@@ -50,9 +50,9 @@ const ArticlesPage = () => {
           to="/module/2"
           className="absolute top-0 right-0 text-xs md:text-sm font-mono bg-editorial-orange text-editorial-cream border-2 border-editorial-orange hover:bg-editorial-charcoal hover:border-editorial-charcoal py-2 px-4 transition-all transform hover:scale-105"
         >
-          Learn more in Module 2 →
+          Learn more in Module 2 -&gt;
         </Link>
-        <h1 className="text-4xl lg:text-6xl font-playfair font-bold text-editorial-charcoal">Fact or Fallacy - Headline Analyzer</h1>
+        <h1 className="text-4xl lg:text-6xl font-playfair font-bold text-editorial-charcoal">Headline Bias Analyzer</h1>
       </div>
       {/* Subtle underline */}
       <div className="w-full h-px bg-gray-300 mb-12"></div> 

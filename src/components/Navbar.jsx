@@ -70,7 +70,7 @@ const Navbar = () => {
     }`}>
       <div className="flex items-center">
         <Link to="/" onClick={handleHomeClick} className="text-xl font-bold font-playfair focus:outline-none">
-          Doublethink
+          ThinkTwice
         </Link>
       </div>
 
