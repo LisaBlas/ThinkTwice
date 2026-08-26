@@ -4,6 +4,16 @@
     "example": "You're either with us or against us.",
     "color": "#2e5266"
   },
+  "False Binary": {
+    "definition": "Presenting only two options when more exist.",
+    "example": "You're either with us or against us.",
+    "color": "#2e5266"
+  },
+  "False Dilemma": {
+    "definition": "Presenting only two options when more exist.",
+    "example": "You're either with us or against us.",
+    "color": "#2e5266"
+  },
   "Ad Hominem": {
     "definition": "Attacking the person instead of their argument.",
     "example": "What would you know about economics? You never even graduated college.",
@@ -69,7 +79,7 @@
     "example": "You can't tell me to quit smoking — you used to smoke, too!",
     "color": "#41292c"
   },
-  "Appeal to Emotion": {
+  "Appeal To Emotion": {
     "definition": "Manipulating feelings instead of using logic.",
     "example": "You should give me the job — I've had such a rough year and really need it.",
     "color": "#41292c"
@@ -103,5 +113,375 @@
     "definition": "Assuming the middle position between two extremes is always correct.",
     "example": "Some say vaccines save lives, others say they're harmful — the truth must be somewhere in between.",
     "color": "#2e5266"
+  },
+  "Presupposition": {
+    "definition": "Embedding an assumption into a statement or question.",
+    "example": "When will you stop lying?",
+    "color": "#6F1D1B"
+  },
+  "Overgeneralization": {
+    "definition": "Making broad claims that go beyond the evidence.",
+    "example": "All politicians are corrupt.",
+    "color": "#6F1D1B"
+  },
+  "Mind-reading": {
+    "definition": "Claiming to know someone's thoughts or intentions without evidence.",
+    "example": "They only did that to get attention.",
+    "color": "#6F1D1B"
+  },
+  "Generalization": {
+    "definition": "Drawing broad conclusions from limited evidence.",
+    "example": "This one bad experience means the whole system is broken.",
+    "color": "#6F1D1B"
+  },
+  "Reductionism": {
+    "definition": "Simplifying complex issues to single causes or explanations.",
+    "example": "It's all about money.",
+    "color": "#6F1D1B"
+  },
+  "Trend Generalization": {
+    "definition": "Treating diverse events as part of a single coherent trend.",
+    "example": "These scattered incidents show a growing pattern.",
+    "color": "#6F1D1B"
+  },
+  "Loaded Premise": {
+    "definition": "Starting from an assumption that should be proven.",
+    "example": "Given the failure of this policy...",
+    "color": "#6F1D1B"
+  },
+  "Collective Guilt": {
+    "definition": "Assigning blame to an entire group for individual actions.",
+    "example": "They all share responsibility for what happened.",
+    "color": "#567568"
+  },
+  "Appeal To Fear": {
+    "definition": "Using fear to influence opinion rather than evidence.",
+    "example": "If we don't act now, disaster will strike.",
+    "color": "#6F1D1B"
+  },
+  "Appeal To Self-interest": {
+    "definition": "Appealing to personal gain rather than the merits of an argument.",
+    "example": "Support this policy and you'll save money.",
+    "color": "#6F1D1B"
+  },
+  "Emotional Framing": {
+    "definition": "Presenting information to evoke an emotional response.",
+    "example": "Innocent children suffer while leaders do nothing.",
+    "color": "#2e5266"
+  },
+  "Loaded Metaphor": {
+    "definition": "Using metaphors that carry evaluative assumptions.",
+    "example": "The government is strangling the economy.",
+    "color": "#2e5266"
+  },
+  "Conflict Bias": {
+    "definition": "Focusing on conflict while ignoring other aspects.",
+    "example": "Protesters clash with police at peaceful demonstration.",
+    "color": "#2e5266"
+  },
+  "Conflict Framing": {
+    "definition": "Presenting issues primarily in terms of conflict.",
+    "example": "The battle over immigration reform continues.",
+    "color": "#2e5266"
+  },
+  "Victim Framing": {
+    "definition": "Presenting people primarily as victims of circumstances.",
+    "example": "Helpless families face impossible choices.",
+    "color": "#2e5266"
+  },
+  "Game Framing": {
+    "definition": "Presenting serious issues as a strategic game.",
+    "example": "The political chess match continues.",
+    "color": "#2e5266"
+  },
+  "Contextual Framing": {
+    "definition": "Placing events in a particular context that shapes interpretation.",
+    "example": "Amid ongoing tensions, the incident occurred.",
+    "color": "#2e5266"
+  },
+  "Partisan Framing": {
+    "definition": "Presenting issues through a partisan political lens.",
+    "example": "Democrats attack Republican plan.",
+    "color": "#2e5266"
+  },
+  "Loaded Language": {
+    "definition": "Using emotionally charged words to influence perception.",
+    "example": "Ruthless dictator crushes opposition.",
+    "color": "#2e5266"
+  },
+  "Disruption Framing": {
+    "definition": "Focusing on disruptive aspects of actions or events.",
+    "example": "Protesters cause chaos in city center.",
+    "color": "#2e5266"
+  },
+  "Movement Framing": {
+    "definition": "Presenting actions as part of a larger movement.",
+    "example": "Wave of protests sweeps across nation.",
+    "color": "#2e5266"
+  },
+  "Comparative Framing": {
+    "definition": "Using comparisons that shape perception.",
+    "example": "The worst crisis since the war.",
+    "color": "#2e5266"
+  },
+  "Association Framing": {
+    "definition": "Linking issues to influence perception through association.",
+    "example": "Celebrity joins controversial cause.",
+    "color": "#2e5266"
+  },
+  "Militarized Metaphor": {
+    "definition": "Using military language to describe non-military situations.",
+    "example": "Economic war, battle of ideas.",
+    "color": "#2e5266"
+  },
+  "Crisis Framing": {
+    "definition": "Presenting situations as crises requiring urgent action.",
+    "example": "Crisis deepens as deadline approaches.",
+    "color": "#2e5266"
+  },
+  "Human-interest Salience": {
+    "definition": "Focusing on individual stories to represent broader issues.",
+    "example": "One family's struggle shows the system's failure.",
+    "color": "#2e5266"
+  },
+  "Selection Framing": {
+    "definition": "Choosing which information to include or exclude.",
+    "example": "Highlighting certain facts while omitting others.",
+    "color": "#2e5266"
+  },
+  "Interpretive Framing": {
+    "definition": "Providing interpretation rather than neutral description.",
+    "example": "Major setback for administration.",
+    "color": "#2e5266"
+  },
+  "Threat Framing": {
+    "definition": "Presenting issues primarily as threats.",
+    "example": "Growing danger from foreign actors.",
+    "color": "#2e5266"
+  },
+  "Agency Framing": {
+    "definition": "Emphasizing who is acting or responsible.",
+    "example": "Government takes action vs. Action taken by government.",
+    "color": "#2e5266"
+  },
+  "Causal Framing": {
+    "definition": "Presenting causal relationships that may be oversimplified.",
+    "example": "Policy leads to economic growth.",
+    "color": "#2e5266"
+  },
+  "Catastrophe Framing": {
+    "definition": "Presenting situations in catastrophic terms.",
+    "example": "Total disaster looms.",
+    "color": "#2e5266"
+  },
+  "Metaphorical Framing": {
+    "definition": "Using metaphors that shape understanding.",
+    "example": "The economy is running out of steam.",
+    "color": "#2e5266"
+  },
+  "Negative Framing": {
+    "definition": "Presenting information primarily in negative terms.",
+    "example": "Failure to act, loss of confidence.",
+    "color": "#2e5266"
+  },
+  "Loaded Terminology": {
+    "definition": "Using terms that carry implicit judgments.",
+    "example": "Regime vs. government, propaganda vs. messaging.",
+    "color": "#2e5266"
+  },
+  "Loaded Quotation": {
+    "definition": "Using quotes that carry emotional or evaluative weight.",
+    "example": "Get a beating, total disaster.",
+    "color": "#2e5266"
+  },
+  "Protest Framing": {
+    "definition": "Presenting protests in ways that shape perception.",
+    "example": "Violent clashes vs. peaceful demonstration disrupted.",
+    "color": "#2e5266"
+  },
+  "Adversarial Framing": {
+    "definition": "Presenting issues as adversarial conflicts.",
+    "example": "Us vs. them narratives.",
+    "color": "#2e5266"
+  },
+  "Narrative Framing": {
+    "definition": "Shaping information into a particular narrative.",
+    "example": "Story of decline, comeback, or crisis.",
+    "color": "#2e5266"
+  },
+  "Juxtaposition": {
+    "definition": "Placing contrasting elements together to create meaning.",
+    "example": "Wealth amid poverty, war during peace talks.",
+    "color": "#2e5266"
+  },
+  "Sensationalism": {
+    "definition": "Presenting information in exaggerated or shocking ways.",
+    "example": "Shocking revelation, explosive development.",
+    "color": "#2e5266"
+  },
+  "Negativity Bias": {
+    "definition": "Focusing disproportionately on negative aspects.",
+    "example": "Highlighting failures while ignoring successes.",
+    "color": "#2e5266"
+  },
+  "Salience Bias": {
+    "definition": "Giving disproportionate attention to salient features.",
+    "example": "Focusing on dramatic but atypical events.",
+    "color": "#2e5266"
+  },
+  "Dramatic Framing": {
+    "definition": "Presenting situations in dramatic terms.",
+    "example": "Moment of truth, decisive battle.",
+    "color": "#2e5266"
+  },
+  "Bandwagon Framing": {
+    "definition": "Presenting something as part of a popular trend.",
+    "example": "Everyone is doing it, growing movement.",
+    "color": "#2e5266"
+  },
+  "Political Categorization": {
+    "definition": "Grouping issues according to political categories.",
+    "example": "Left vs. right, progressive vs. conservative.",
+    "color": "#2e5266"
+  },
+  "Fear Framing": {
+    "definition": "Presenting issues to evoke fear.",
+    "example": "Threats, dangers, risks.",
+    "color": "#2e5266"
+  },
+  "Negative Evaluation": {
+    "definition": "Including explicit negative judgments.",
+    "example": "Failed policy, disastrous decision.",
+    "color": "#2e5266"
+  },
+  "Escalation Framing": {
+    "definition": "Presenting situations as escalating.",
+    "example": "Tensions rise, conflict intensifies.",
+    "color": "#2e5266"
+  },
+  "Slippery-slope Implication": {
+    "definition": "Suggesting consequences will escalate without evidence.",
+    "example": "This will lead to worse outcomes.",
+    "color": "#2e5266"
+  },
+  "Trend Extrapolation": {
+    "definition": "Projecting current trends into the future.",
+    "example": "If this continues, we'll see major changes.",
+    "color": "#2e5266"
+  },
+  "Problem Framing": {
+    "definition": "Defining something as a problem needing solution.",
+    "example": "The immigration problem.",
+    "color": "#2e5266"
+  },
+  "Collective Responsibility Framing": {
+    "definition": "Presenting issues as collective responsibilities.",
+    "example": "We must all act, the world failed.",
+    "color": "#2e5266"
+  },
+  "Trend Framing": {
+    "definition": "Presenting events as part of a trend.",
+    "example": "Growing pattern, emerging trend.",
+    "color": "#2e5266"
+  },
+  "Fear Appeal": {
+    "definition": "Using fear to motivate action or agreement.",
+    "example": "Act now or face disaster.",
+    "color": "#2e5266"
+  },
+  "Metaphor": {
+    "definition": "Using figurative language that shapes understanding.",
+    "example": "Climate change battle, economic war.",
+    "color": "#2e5266"
+  },
+  "Collective Blame": {
+    "definition": "Assigning blame to a collective group.",
+    "example": "Politicians are failing us.",
+    "color": "#2e5266"
+  },
+  "Loaded Framing": {
+    "definition": "Using framing that carries implicit assumptions.",
+    "example": "How the world failed Gaza.",
+    "color": "#2e5266"
+  },
+  "Humanitarian Framing": {
+    "definition": "Presenting issues in humanitarian terms.",
+    "example": "Humanitarian crisis, aid needed.",
+    "color": "#2e5266"
+  },
+  "Motive Attribution": {
+    "definition": "Assigning motives without sufficient evidence.",
+    "example": "They only want power, he's trying to distract.",
+    "color": "#567568"
+  },
+  "Personalization": {
+    "definition": "Focusing on individuals rather than systems or institutions.",
+    "example": "Trump's policy, Biden's decision.",
+    "color": "#567568"
+  },
+  "Anthropomorphism": {
+    "definition": "Attributing human characteristics to non-human entities.",
+    "example": "The economy is recovering, markets are worried.",
+    "color": "#567568"
+  },
+  "Personification": {
+    "definition": "Treating abstract concepts as if they were people.",
+    "example": "China's economy defies expectations.",
+    "color": "#567568"
+  },
+  "Uncertainty Amplification": {
+    "definition": "Exaggerating uncertainty or ambiguity.",
+    "example": "Future hangs in the balance.",
+    "color": "#567568"
+  },
+  "Agency Bias": {
+    "definition": "Overemphasizing or underemphasizing agency.",
+    "example": "Passive voice for some actors, active for others.",
+    "color": "#567568"
+  },
+  "Causal Simplification": {
+    "definition": "Oversimplifying complex causal relationships.",
+    "example": "Policy X caused outcome Y.",
+    "color": "#567568"
+  },
+  "Human-interest Bias": {
+    "definition": "Focusing on human interest stories at expense of broader context.",
+    "example": "Individual story represents larger trend.",
+    "color": "#567568"
+  },
+  "Attribution Bias": {
+    "definition": "Systematic errors in attributing causes.",
+    "example": "Attributing success to skill, failure to luck.",
+    "color": "#567568"
+  },
+  "Agency Asymmetry": {
+    "definition": "Treating different actors with different levels of agency.",
+    "example": "One side acts, the other responds.",
+    "color": "#567568"
+  },
+  "Trend Amplification": {
+    "definition": "Exaggerating the significance or extent of a trend.",
+    "example": "Surging support, overwhelming momentum.",
+    "color": "#567568"
+  },
+  "Threat Inflation": {
+    "definition": "Exaggerating the severity of threats.",
+    "example": "Existential threat, grave danger.",
+    "color": "#567568"
+  },
+  "Framing": {
+    "definition": "The way information is presented shapes interpretation.",
+    "example": "Tax relief vs. tax cut.",
+    "color": "#2e5266"
+  },
+  "Cognitive Bias": {
+    "definition": "Systematic patterns of deviation from rationality.",
+    "example": "Preferring information that confirms existing beliefs.",
+    "color": "#567568"
+  },
+  "Logical Fallacy": {
+    "definition": "Errors in reasoning that undermine arguments.",
+    "example": "Attacking the person rather than the argument.",
+    "color": "#6F1D1B"
   }
 }

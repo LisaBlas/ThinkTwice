@@ -5,22 +5,23 @@ import { motion, AnimatePresence } from 'framer-motion';
 const CourseSpotlight = () => {
   const navigate = useNavigate();
   const modules = [
-    { title: 'Introduction to Core Concepts - Fallacies and Biases', description: 'Understand the basics and why they matter. Learn about the behaviour and habits of your brain that influence how you process information. Preview this module.', comingSoon: false, link: '/module/1' },
-    { title: 'Spotlight on mainstream News and Reporting', description: 'See how events become headlines and learn to read between the lines. Sharpen your eye for bias, logical flaws and manipulation techniques. Try our first interactive tool.', comingSoon: true, link: null },
-    { title: 'Spotlight on Social Media and AI', description: 'Dive into how short-form formats, algorithms and AI infuence our perception of truth. Gain confidence to spot fake and misinformed content.', comingSoon: true, link: null },
-    { title: 'Spotlight on Science and Academia', description: 'Navigate scientific studies, research papers and academic discourse with confidence. Learn to evaluate methodology, understand statistical claims and distinguish credible research from pseudoscience.', comingSoon: true, link: null },
-    { title: 'Spotlight on Consumption - your daily Biases', description: 'Explore the blind spots in your own mind that change how you see the world. Learn how to spot and counteract biases that may cloud your judgement and decisions.', comingSoon: true, link: null },
-    { title: 'Heated Argument or constructive Debate?', description: 'Discover tweaks that can shift and improve conversations with friends and family. Respond to faulty arguments and errors in reasoning with confidence and poise.', comingSoon: true, link: null },
+    { title: 'Introduction to Core Concepts - Two Systems of Thinking', description: 'Understand the basics and why they matter. Learn about the behaviour and habits of your brain that influence how you process information. Preview this module now!', comingSoon: false, link: '/module/1' },
+    { title: 'Understand Fallacies and Biases through News Headlines', description: 'Sharpen your eye for bias, logical flaws and manipulation techniques with real world examples.', comingSoon: true, link: null },
+    { title: 'Investigate controversial Topics with Critical Thinking', description: 'Review and assess real debates and discussions. Learn how to dig deeper and ask the right questions to form well-rounded opinions.', comingSoon: true, link: null },
+    { title: 'Going Beyond that one Statistic - understand Research Studies and Evidence', description: 'Navigate scientific studies, research papers and academic discourse with confidence. Learn to evaluate methodology, understand statistical claims and distinguish credible research from pseudoscience.', comingSoon: true, link: null },
+    { title: 'Spotlight on Consumption - notice your daily Biases', description: 'Explore the blind spots in your own mind that change how you see the world. Learn how to spot and counteract biases that may cloud your judgement and decisions.', comingSoon: true, link: null },
+    { title: 'Heated Argument or constructive Debate? Practice Key Techniques', description: 'Discover tweaks that can shift and improve conversations with friends and family. Respond to faulty arguments and errors in reasoning with confidence and poise.', comingSoon: true, link: null },
   ];
   const [active, setActive] = useState(0);
 
-  const handleModuleClick = (idx, module) => {
+  const handleModuleClick = (idx) => {
     setActive(idx);
+  };
+
+  const handleTryNowClick = (e, module) => {
+    e.stopPropagation();
     if (module.link) {
-      // Small delay to show the selection before navigating
-      setTimeout(() => {
-        navigate(module.link, { state: { fromHome: true } });
-      }, 300);
+      navigate(module.link, { state: { fromHome: true } });
     }
   };
 
@@ -56,9 +57,9 @@ const CourseSpotlight = () => {
               {modules.map((module, idx) => (
                 <motion.button
                   key={idx}
-                  onClick={() => handleModuleClick(idx, module)}
+                  onClick={() => handleModuleClick(idx)}
                   className={`w-full relative flex flex-col text-left pl-6 pr-4 py-4 overflow-hidden transition-all duration-300 ${
-                    active === idx
+                    !module.comingSoon && active === idx
                       ? 'text-editorial-charcoal'
                       : 'text-editorial-cream hover:opacity-80'
                   } ${module.link ? 'cursor-pointer' : 'cursor-default'}`}
@@ -105,13 +106,16 @@ const CourseSpotlight = () => {
                         Coming Soon
                       </span>
                     ) : (
-                      <span className={`text-xs px-2 py-0.5 font-mono font-semibold ${
-                        active === idx
-                          ? 'bg-editorial-cream text-editorial-orange'
-                          : 'bg-editorial-cream/20 text-editorial-cream'
-                      }`}>
+                      <button
+                        onClick={(e) => handleTryNowClick(e, module)}
+                        className={`text-xs px-2 py-0.5 font-mono font-semibold ${
+                          active === idx
+                            ? 'bg-[#6F1D1B] text-white'
+                            : 'bg-editorial-cream/20 text-editorial-cream'
+                        }`}
+                      >
                         Try Now
-                      </span>
+                      </button>
                     )}
                   </motion.span>
 

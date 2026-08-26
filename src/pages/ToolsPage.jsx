@@ -17,7 +17,7 @@ const ToolsPage = () => {
       title: 'System 1 Bingo',
       icon: SparklesIcon,
       color: '#41292c',
-      shortDescription: 'Sort everyday reactions into System 1 and System 2',
+      shortDescription: 'Sort everyday reactions into System 1 and System 2 thinking.',
       fullDescription: 'System 1 Bingo is an interactive sorting game that trains you to spot fast, automatic thinking in everyday situations. Select the System 1 cards, reveal the answers, and inspect the bias or fallacy behind each reaction.',
       features: [
         'Three rounds of 16 relatable situations',
@@ -33,7 +33,7 @@ const ToolsPage = () => {
       title: 'Headline Bias Detector',
       icon: ExclamationTriangleIcon,
       color: '#2e5266',
-      shortDescription: 'Explore bias and framing in international headlines',
+      shortDescription: 'Explore bias and framing in international news headlines.',
       fullDescription: 'Our Headline Bias Detector helps you recognize common framing patterns, rhetorical devices, and fallacy-adjacent techniques in international English-language news headlines.',
       features: [
         'Curated international headline dataset',

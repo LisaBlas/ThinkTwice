@@ -3,13 +3,6 @@ import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const ComingSoonModal = ({ isOpen, onClose }) => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // TODO: integrate real waitlist signup logic
-    alert('Thanks for joining the waitlist! We\'ll notify you when Module 2 is ready.');
-    onClose();
-  };
-
   return (
     <AnimatePresence>
       {isOpen && (
@@ -42,25 +35,15 @@ const ComingSoonModal = ({ isOpen, onClose }) => {
               {/* Content */}
               <div className="p-8">
                 <p className="text-editorial-charcoal text-lg mb-6 leading-relaxed">
-                  We're still hard at work perfecting this module. Join the waitlist to be notified when it's ready!
+                  We're still hard at work perfecting this module. Express your interest to motivate us to finish it faster!
                 </p>
-                
 
-                {/* Waitlist Form */}
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <input
-                    type="email"
-                    required
-                    placeholder="your.email@example.com"
-                    className="w-full px-6 py-3 text-sm font-mono text-editorial-charcoal bg-editorial-cream border-2 border-editorial-orange focus:outline-none focus:ring-2 focus:ring-editorial-orange"
-                  />
-                  <button
-                    type="submit"
-                    className="w-full bg-editorial-orange text-editorial-cream border-2 border-editorial-orange font-mono hover:bg-editorial-charcoal hover:border-editorial-charcoal text-sm py-3 px-8 transition-all transform hover:scale-105"
-                  >
-                    Join the Waitlist
-                  </button>
-                </form>
+                {/* Mailto Button */}
+                <div className="flex justify-center mb-6">
+                  <a href="mailto:bleepbloopproducts@gmail.com?subject=Critical%20Thinking%20course%20interest" className="w-60 text-center text-editorial-orange border-editorial-orange bg-editorial-cream border-2 font-mono hover:bg-editorial-charcoal hover:border-editorial-charcoal hover:text-editorial-cream text-xs sm:text-sm py-2 px-4 transition-colors duration-100 transform hover:scale-105 shrink-0">
+                    Express your interest and inspire us to keep going!
+                  </a>
+                </div>
 
                 {/* Divider */}
                 <div className="flex items-center gap-4 my-6">

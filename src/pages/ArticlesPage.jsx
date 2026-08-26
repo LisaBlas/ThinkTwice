@@ -53,6 +53,9 @@ const ArticlesPage = () => {
           Learn more in Module 2 -&gt;
         </Link>
         <h1 className="text-4xl lg:text-6xl font-playfair font-bold text-editorial-charcoal">Headline Bias Analyzer</h1>
+        <p className="mt-4 text-lg text-editorial-charcoal/80 font-light max-w-3xl">
+          These are real headlines from the past few years across various topics. They are sourced from major mainstream international news outlets across the political spectrum. These examples will help you spot different manipulative and misleading techniques used in headlines.
+        </p>
       </div>
       {/* Subtle underline */}
       <div className="w-full h-px bg-gray-300 mb-12"></div> 
