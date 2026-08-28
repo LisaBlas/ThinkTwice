@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { XMarkIcon, MagnifyingGlassIcon, ExclamationTriangleIcon, LightBulbIcon, NewspaperIcon, AcademicCapIcon, ChartBarIcon, SparklesIcon } from '@heroicons/react/24/solid';
 import Footer from '../components/Footer';
 
 const ToolsPage = () => {
+  const navigate = useNavigate();
   const [selectedTool, setSelectedTool] = useState(null);
 
   // Scroll to top when component mounts
@@ -112,7 +114,7 @@ const ToolsPage = () => {
 
   const handleTileClick = (tool) => {
     if (tool.link) {
-      window.location.href = tool.link;
+      navigate(tool.link);
     } else {
       setSelectedTool(tool);
     }

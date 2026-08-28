@@ -44,23 +44,25 @@ const ArticlesPage = () => {
   if (error) return <div className="text-center p-8 text-red-500">{error}</div>;
 
   return (
-    <div className="relative container mx-auto px-4 py-12 lg:py-20 lg:px-40 bg-beige-100">
-      <div className="mb-8 relative">
-        <Link
-          to="/module/2"
-          className="absolute top-0 right-0 text-xs md:text-sm font-mono bg-editorial-orange text-editorial-cream border-2 border-editorial-orange hover:bg-editorial-charcoal hover:border-editorial-charcoal py-2 px-4 transition-all transform hover:scale-105"
-        >
-          Learn more in Module 2 -&gt;
-        </Link>
-        <h1 className="text-4xl lg:text-6xl font-playfair font-bold text-editorial-charcoal">Headline Bias Analyzer</h1>
-        <p className="mt-4 text-lg text-editorial-charcoal/80 font-light max-w-3xl">
+    <div className="relative container mx-auto px-4 py-8 md:py-12 lg:py-20 lg:px-40 bg-beige-100">
+      <div className="mb-6 md:mb-8">
+        <div className="flex justify-end mb-4">
+          <Link
+            to="/module/2"
+            className="text-xs md:text-sm font-mono bg-editorial-orange text-editorial-cream border-2 border-editorial-orange hover:bg-editorial-charcoal hover:border-editorial-charcoal py-2 px-4 transition-all transform hover:scale-105"
+          >
+            Learn more in Module 2 -&gt;
+          </Link>
+        </div>
+        <h1 className="font-playfair font-bold text-4xl md:text-6xl text-editorial-charcoal">Headline Bias Analyzer</h1>
+        <p className="text-lg text-editorial-charcoal/80 font-light max-w-3xl">
           These are real headlines from the past few years across various topics. They are sourced from major mainstream international news outlets across the political spectrum. These examples will help you spot different manipulative and misleading techniques used in headlines.
         </p>
       </div>
       {/* Subtle underline */}
-      <div className="w-full h-px bg-gray-300 mb-12"></div> 
+      <div className="w-full h-px bg-gray-300 mb-6 md:mb-12"></div> 
       {/* Desktop / Tablet layout */}
-      <div className="hidden md:grid grid-cols-3 gap-16 border border-beige-100 shadow-lg p-10">
+      <div className="hidden md:grid grid-cols-3 gap-8 md:gap-16 border border-beige-100 shadow-lg p-6 md:p-10">
         {/* Sidebar filters */}
         <aside className="col-span-1 sticky top-24 self-start">
           <FilterSection
@@ -71,7 +73,7 @@ const ArticlesPage = () => {
           />
         </aside>
         {/* Articles */}
-        <div className="col-span-2 grid grid-cols-1 gap-8">
+        <div className="col-span-2 grid grid-cols-1 gap-4 md:gap-8">
           {filteredArticles.map((article, index) => (
             <ArticleCard key={`${article.url}-${index}`} article={article} />
           ))}
@@ -79,7 +81,7 @@ const ArticlesPage = () => {
       </div>
 
       {/* Mobile articles list */}
-      <div className="md:hidden grid grid-cols-1 gap-8 border border-beige-100 shadow-lg p-6">
+      <div className="md:hidden grid grid-cols-1 gap-4 md:gap-8 border border-beige-100 shadow-lg p-4 md:p-6">
         {filteredArticles.map((article, index) => (
           <ArticleCard key={`${article.url}-${index}`} article={article} />
         ))}

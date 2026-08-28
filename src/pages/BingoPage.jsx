@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import Footer from '../components/Footer';
@@ -360,16 +360,47 @@ const BingoPage = () => {
   const [selectedCards, setSelectedCards] = useState([]);
   const [revealed, setRevealed] = useState(false);
   const [flippedCards, setFlippedCards] = useState([]);
+  const [currentCardIndex, setCurrentCardIndex] = useState(0);
+  const [viewedCardIds, setViewedCardIds] = useState([]);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile screen size
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const cards = useMemo(
     () => shuffleCards(rounds[roundIndex]).map((card, index) => ({ ...card, id: `${roundIndex}-${index}-${card.situation}` })),
     [roundIndex, shuffleKey]
   );
 
+  useEffect(() => {
+    if (cards.length > 0) {
+      setViewedCardIds([cards[0].id]);
+    }
+  }, [cards]);
+
+  useEffect(() => {
+    const currentCard = cards[currentCardIndex];
+    if (!currentCard) return;
+
+    setViewedCardIds((current) =>
+      current.includes(currentCard.id) ? current : [...current, currentCard.id]
+    );
+  }, [cards, currentCardIndex]);
+
   const systemOneIds = cards.filter((card) => card.system === 'System 1').map((card) => card.id);
   const correctSelections = selectedCards.filter((id) => systemOneIds.includes(id)).length;
   const falseSelections = selectedCards.length - correctSelections;
   const missedSelections = systemOneIds.length - correctSelections;
+  const hasViewedAllCards = viewedCardIds.length === cards.length;
 
   const toggleCard = (id) => {
     if (revealed) {
@@ -384,7 +415,21 @@ const BingoPage = () => {
     );
   };
 
+  const handleNextCard = () => {
+    if (currentCardIndex < cards.length - 1) {
+      setCurrentCardIndex(currentCardIndex + 1);
+    }
+  };
+
+  const handlePreviousCard = () => {
+    if (currentCardIndex > 0) {
+      setCurrentCardIndex(currentCardIndex - 1);
+    }
+  };
+
   const handleReveal = () => {
+    if (isMobile && !hasViewedAllCards) return;
+
     setRevealed(true);
     setFlippedCards([...selectedCards]);
   };
@@ -393,6 +438,8 @@ const BingoPage = () => {
     setSelectedCards([]);
     setRevealed(false);
     setFlippedCards([]);
+    setCurrentCardIndex(0);
+    setViewedCardIds(cards.length > 0 ? [cards[0].id] : []);
   };
 
   const handleShuffle = () => {
@@ -402,30 +449,31 @@ const BingoPage = () => {
     setSelectedCards([]);
     setRevealed(false);
     setFlippedCards([]);
+    setCurrentCardIndex(0);
+    setViewedCardIds([]);
   };
 
   return (
     <>
       <div className="bg-beige-100 min-h-screen">
         <div className="container mx-auto px-4 py-12">
-          <div className="text-center mb-10 relative">
-            <Link
-              to="/module/1"
-              className="block md:absolute md:top-0 md:right-0 mb-8 md:mb-0 text-xs md:text-sm font-mono bg-editorial-orange text-editorial-cream border-2 border-editorial-orange hover:bg-editorial-charcoal hover:border-editorial-charcoal py-2 px-4 transition-all transform hover:scale-105"
-            >
-              Learn more in Module 1 -&gt;
-            </Link>
-            <p className="font-mono text-xs uppercase tracking-widest text-editorial-orange mb-3">
-              Round {roundIndex + 1} of {rounds.length}
-            </p>
-            <h1 className="font-playfair font-bold text-4xl md:text-5xl text-editorial-charcoal mb-4">
+          <div className="max-w-6xl mx-auto mb-8">
+            <div className="flex justify-end mb-4">
+              <Link
+                to="/module/1"
+                className="text-xs md:text-sm font-mono bg-editorial-orange text-editorial-cream border-2 border-editorial-orange hover:bg-editorial-charcoal hover:border-editorial-charcoal py-2 px-4 transition-all transform hover:scale-105"
+              >
+                Learn more in Module 1 -&gt;
+              </Link>
+            </div>
+            <h1 className="font-playfair font-bold text-4xl md:text-6xl text-editorial-charcoal mb-4">
               System 1 or System 2?
             </h1>
-            <p className="text-lg text-editorial-charcoal/80 font-light max-w-3xl mx-auto mb-6">
+            <p className="text-lg text-editorial-charcoal/80 font-light max-w-3xl mb-6">
               Read each everyday situation and reaction. Select every card that shows fast, automatic System 1 thinking, then reveal the answers.
             </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
-              {!revealed ? (
+            <div className="flex flex-col sm:flex-row gap-4">
+              {!revealed && !isMobile ? (
                 <button
                   onClick={handleReveal}
                   disabled={selectedCards.length === 0}
@@ -437,14 +485,14 @@ const BingoPage = () => {
                 >
                   Show Results ({selectedCards.length} selected)
                 </button>
-              ) : (
+              ) : !isMobile ? (
                 <button
                   onClick={handleReset}
                   className="bg-editorial-charcoal text-editorial-cream border-2 border-editorial-charcoal font-mono hover:bg-editorial-orange hover:border-editorial-orange text-sm py-3 px-8 transition-all transform hover:scale-105"
                 >
                   Reset Same 16
                 </button>
-              )}
+              ) : null}
               <button
                 onClick={handleShuffle}
                 className="bg-editorial-cream text-editorial-charcoal border-2 border-editorial-charcoal font-mono hover:bg-editorial-charcoal hover:text-editorial-cream text-sm py-3 px-8 transition-all transform hover:scale-105"
@@ -453,26 +501,92 @@ const BingoPage = () => {
               </button>
             </div>
           </div>
+          {/* Subtle underline */}
+          <div className="max-w-6xl mx-auto w-full h-px bg-gray-300 mb-12"></div>
 
-          {revealed && (
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="max-w-5xl mx-auto mb-8 bg-editorial-cream border-4 border-editorial-charcoal p-5 text-editorial-charcoal"
-            >
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-center">
-                <ResultStat label="Correct System 1" value={`${correctSelections}/${systemOneIds.length}`} />
-                <ResultStat label="System 2 Picked" value={falseSelections} />
-                <ResultStat label="Missed System 1" value={missedSelections} />
-                <ResultStat label="Score" value={`${Math.round((correctSelections / systemOneIds.length) * 100)}%`} />
+          {/* Mobile Carousel */}
+          {isMobile && !revealed && (
+            <div className="max-w-6xl mx-auto mb-12">
+              <div className="flex justify-between items-center mb-4">
+                <span className="font-mono text-sm text-editorial-charcoal">
+                  Card {currentCardIndex + 1} of {cards.length}
+                </span>
+                <div className="flex gap-2">
+                  <button
+                    onClick={handlePreviousCard}
+                    disabled={currentCardIndex === 0}
+                    className="bg-editorial-charcoal text-editorial-cream px-3 py-1 font-mono text-sm disabled:opacity-50"
+                  >
+                    Previous
+                  </button>
+                  <button
+                    onClick={handleNextCard}
+                    disabled={currentCardIndex === cards.length - 1}
+                    className="bg-editorial-charcoal text-editorial-cream px-3 py-1 font-mono text-sm disabled:opacity-50"
+                  >
+                    Next
+                  </button>
+                </div>
               </div>
-              <p className="font-mono text-xs text-editorial-charcoal/70 text-center mt-4">
-                Selected cards are flipped. Click any card after revealing to inspect its answer.
-              </p>
-            </motion.div>
+              <div className="w-full">
+                <BingoCard
+                  card={cards[currentCardIndex]}
+                  isSelected={selectedCards.includes(cards[currentCardIndex].id)}
+                  isMissed={revealed && cards[currentCardIndex].system === 'System 1' && !selectedCards.includes(cards[currentCardIndex].id)}
+                  isRevealed={revealed}
+                  isFlipped={flippedCards.includes(cards[currentCardIndex].id)}
+                  onClick={() => toggleCard(cards[currentCardIndex].id)}
+                />
+              </div>
+              
+              {/* Mobile Results Button */}
+              <div className="mt-6 text-center">
+                <button
+                  onClick={handleReveal}
+                  disabled={selectedCards.length === 0 || !hasViewedAllCards}
+                  className={`font-mono text-sm py-3 px-8 transition-all transform ${
+                    selectedCards.length === 0 || !hasViewedAllCards
+                      ? 'bg-editorial-charcoal/20 text-editorial-charcoal/40 cursor-not-allowed'
+                      : 'bg-editorial-orange text-editorial-cream border-2 border-editorial-orange hover:bg-editorial-charcoal hover:border-editorial-charcoal hover:scale-105'
+                  }`}
+                >
+                  {hasViewedAllCards
+                    ? `Show Results (${selectedCards.length} selected)`
+                    : `View All Cards (${viewedCardIds.length}/${cards.length})`}
+                </button>
+              </div>
+            </div>
           )}
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto mb-12">
+          {/* Mobile Results Cards */}
+          {isMobile && revealed && (
+            <div className="max-w-6xl mx-auto mb-12">
+              <div className="grid grid-cols-1 gap-4">
+                {cards.map((card) => (
+                  <BingoCard
+                    key={card.id}
+                    card={card}
+                    isSelected={selectedCards.includes(card.id)}
+                    isMissed={card.system === 'System 1' && !selectedCards.includes(card.id)}
+                    isRevealed={revealed}
+                    isFlipped={flippedCards.includes(card.id)}
+                    onClick={() => toggleCard(card.id)}
+                  />
+                ))}
+              </div>
+              <div className="mt-6 text-center">
+                <button
+                  onClick={handleReset}
+                  className="bg-editorial-charcoal text-editorial-cream border-2 border-editorial-charcoal font-mono hover:bg-editorial-orange hover:border-editorial-orange text-sm py-3 px-8 transition-all transform hover:scale-105"
+                >
+                  Reset Same 16
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Desktop Grid */}
+          <div className="hidden sm:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto mb-12">
             {cards.map((card) => (
               <BingoCard
                 key={card.id}
@@ -485,6 +599,25 @@ const BingoPage = () => {
               />
             ))}
           </div>
+
+          {/* Results Section */}
+          {revealed && (
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="max-w-6xl mx-auto mb-8 bg-editorial-cream border-4 border-editorial-charcoal p-5 text-editorial-charcoal"
+            >
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-center">
+                <ResultStat label="Correct System 1" value={`${correctSelections}/${systemOneIds.length}`} />
+                <ResultStat label="System 2 Picked" value={falseSelections} />
+                <ResultStat label="Missed System 1" value={missedSelections} />
+                <ResultStat label="Score" value={`${Math.round((correctSelections / systemOneIds.length) * 100)}%`} />
+              </div>
+              <p className="font-mono text-xs text-editorial-charcoal/70 text-center mt-4">
+                Selected cards are flipped. Click any card after revealing to inspect its answer.
+              </p>
+            </motion.div>
+          )}
         </div>
       </div>
 
@@ -514,7 +647,7 @@ const BingoCard = ({ card, isSelected, isMissed, isRevealed, isFlipped, onClick 
   return (
     <motion.button
       type="button"
-      className="relative min-h-[17rem] cursor-pointer text-left"
+      className="relative min-h-[16rem] w-full cursor-pointer text-left"
       onClick={onClick}
       whileHover={{ scale: 1.025 }}
       whileTap={{ scale: 0.98 }}
@@ -530,19 +663,14 @@ const BingoCard = ({ card, isSelected, isMissed, isRevealed, isFlipped, onClick 
             transition={{ duration: 0.25 }}
             className={`absolute inset-0 border-4 shadow-lg p-4 flex flex-col justify-between transition-colors ${frontTone}`}
           >
-            <div>
-              <p className="font-mono text-[0.68rem] uppercase opacity-70 mb-3">Situation</p>
-              <p className="text-base font-semibold leading-snug">{card.situation}</p>
+            <div className="mb-1 sm:mb-0">
+              <p className="font-mono text-[0.7rem] sm:text-[0.75rem] uppercase opacity-70 mb-2">Situation</p>
+              <p className="text-base sm:text-base font-semibold leading-snug">{card.situation}</p>
             </div>
             <div>
-              <p className="font-mono text-[0.68rem] uppercase opacity-70 mb-2">Reaction</p>
-              <p className="text-sm leading-snug">{card.reaction}</p>
+              <p className="font-mono text-[0.7rem] sm:text-[0.75rem] uppercase opacity-70 mb-2">Reaction</p>
+              <p className="text-sm sm:text-sm leading-snug">{card.reaction}</p>
             </div>
-            {isSelected && (
-              <span className="absolute top-3 right-3 w-7 h-7 bg-editorial-cream text-editorial-orange rounded-full flex items-center justify-center font-bold text-sm">
-                OK
-              </span>
-            )}
             {isMissed && (
               <span className="absolute top-3 right-3 bg-editorial-orange text-editorial-cream font-mono text-[0.65rem] px-2 py-1">
                 Missed
@@ -558,14 +686,14 @@ const BingoCard = ({ card, isSelected, isMissed, isRevealed, isFlipped, onClick 
             transition={{ duration: 0.25 }}
             className={`absolute inset-0 border-4 shadow-lg p-4 flex flex-col justify-between ${backTone}`}
           >
-            <div>
-              <p className="font-mono text-[0.68rem] uppercase opacity-70 mb-3">Answer</p>
-              <p className="font-playfair font-bold text-3xl leading-none mb-4">{card.system}</p>
-              <p className="text-sm leading-snug">{card.solution}</p>
+            <div className="mb-1 sm:mb-0">
+              <p className="font-mono text-[0.7rem] sm:text-[0.75rem] uppercase opacity-70 mb-2">Answer</p>
+              <p className="font-playfair font-bold text-3xl sm:text-3xl leading-none mb-2">{card.system}</p>
+              <p className="text-sm sm:text-sm leading-snug">{card.solution}</p>
             </div>
             <div>
-              <p className="font-mono text-[0.68rem] uppercase opacity-70 mb-2">Key bias or fallacy</p>
-              <p className="font-mono text-xs font-semibold">{card.concept}</p>
+              <p className="font-mono text-[0.7rem] sm:text-[0.75rem] uppercase opacity-70 mb-2">Key bias or fallacy</p>
+              <p className="font-mono text-[0.7rem] sm:text-[0.75rem] font-semibold leading-tight">{card.concept}</p>
             </div>
           </motion.div>
         )}

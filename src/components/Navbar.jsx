@@ -106,24 +106,6 @@ const Navbar = () => {
           Home
         </button>
 
-        {/* Articles */}
-        <Link
-          to="/articles"
-          onClick={closeMenu}
-          className="hover:text-editorial-orange transition-all font-normal hover:font-bold"
-        >
-          Articles
-        </Link>
-
-        {/* Bingo */}
-        <Link
-          to="/bingo"
-          onClick={closeMenu}
-          className="hover:text-editorial-orange transition-all font-normal hover:font-bold"
-        >
-          Bingo
-        </Link>
-
         {/* Tools */}
         <Link
           to="/tools"
@@ -175,24 +157,6 @@ const Navbar = () => {
           >
             Home
           </button>
-
-          {/* Articles */}
-          <Link
-            to="/articles"
-            onClick={closeMenu}
-            className="hover:text-editorial-orange transition-all font-normal hover:font-bold"
-          >
-            Articles
-          </Link>
-
-          {/* Bingo */}
-          <Link
-            to="/bingo"
-            onClick={closeMenu}
-            className="hover:text-editorial-orange transition-all font-normal hover:font-bold"
-          >
-            Bingo
-          </Link>
 
           {/* Tools */}
           <Link
