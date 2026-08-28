@@ -26,7 +26,7 @@ const ArticlesPage = () => {
   useEffect(() => {
     const fetchArticles = async () => {
       try {
-        const response = await axios.get('/data/headlines.json');
+        const response = await axios.get(`${import.meta.env.BASE_URL}data/headlines.json`)
         const fetchedArticles = response.data.headlines || [];
         setArticles(fetchedArticles);
         setFilteredArticles(fetchedArticles);
